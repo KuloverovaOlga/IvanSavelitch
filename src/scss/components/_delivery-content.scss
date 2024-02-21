@@ -1,0 +1,34 @@
+.delivery-content {
+
+    // .delivery-content__inner
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 6rem;
+    }
+
+    // .delivery-content__title
+
+    &__title {
+    
+    }
+
+    // .delivery-content__text-box
+
+    &__text-box {
+        width: 103.9rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        @include small-tablet {
+            width: 100%;
+          }
+    }
+
+    // .delivery-content__text
+
+    &__text {
+    }
+}
+
