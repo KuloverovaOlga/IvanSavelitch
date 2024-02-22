@@ -1,105 +1,81 @@
 .footer {
-  &__top {
-    padding: 5.2rem 0;
-    border-top: 1.5px solid $black;
-    display: flex;
-    justify-content: space-between;
-  }
+  &--stub {
+    // .footer__container
 
-  &__bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: $grew;
-    padding-bottom: 6rem;
-  }
-
-  &__logo {
-    width: 17.1rem;
-    height: 2.6rem;
-
-    svg {
+    & .footer__container {
+      max-width: 192rem;
       width: 100%;
-      height: 100%;
-      -o-object-fit: contain;
-         object-fit: contain;
-    }
-  }
-
-  &__about {
-    &-top {
-      display: flex;
-      flex-direction: column;
-      gap: 1.6rem;
-    }
-
-    &-bottom {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-  }
-
-  &__pages {
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-  }
-
-  &__req {
-    width: 43.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3.2rem;
-
-    &-content {
-      width: 37rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-  }
-
-  &__contacts {
-    &-title {
-      margin-bottom: 1.6rem;
-    }
-    &-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin-bottom: 6.1rem;
-    }
-    &-socials {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
-    &-icon {
-      border-radius: 5rem;
-      width: 4.4rem;
-      height: 4.4rem;
-      border: 0.1rem solid $black;
-      display: flex;
-      cursor: pointer;
-
-      svg {
+      position: relative;
+      @include small-tablet {
         width: 100%;
-        height: 100%;
-        -o-object-fit: contain;
-        object-fit: contain;
+        padding: 0;
       }
     }
-  }
 
-  &__list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    &-col {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
+    // .footer__svg-box
+
+    & .footer__svg-box {
+      width: 100%;
+      height: 31.5rem;
+      & svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      @include small-tablet {
+        margin-top: -20rem;
+        height: 60rem;
+        & svg {
+        }
+      }
+    }
+
+    & .footer__img-box {
+      position: absolute;
+      width: 8.2rem;
+      height: 8.2rem;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: $light-blue;
+      border: 0.4rem solid $dark-orange;
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      @include small-tablet {
+     
+        background-color: $dark-orange;
+        border: 0.4rem solid $light-blue;
+      }
+    }
+
+    & .footer__img-box--left {
+      top: -15rem;
+      right: 13.2rem;
+      @include small-tablet {
+        width: 13rem;
+        height: 13rem; 
+        top: auto;
+        right: auto;
+        bottom: 7rem;
+        left: 10rem;
+      }
+    }
+
+    & .footer__img-box--right {
+ 
+      top: -21.5rem;
+      right: 5rem;
+      @include small-tablet {
+        width: 10rem;
+        height: 10rem; 
+        top: auto;
+        right: auto;
+        bottom: 18rem;
+        right: 14rem;
+      }
     }
   }
 }

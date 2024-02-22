@@ -51,15 +51,3 @@ main {
 @import './ui/ui';
 
 
-section {
-  padding: 10rem 0;
-  @include small-tablet {
-    padding: 9rem 0;
-  }
-  &._first {
-    padding: 4.2rem 0 9rem;
-    // @include small-tablet {
-    //   padding: 2.6rem 0 10rem;
-    // }
-  }
-}
