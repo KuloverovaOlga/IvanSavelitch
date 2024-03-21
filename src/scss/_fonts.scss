@@ -10,6 +10,16 @@
 }
 @font-face {
 	font-family: 'Mont';
+	src: url('./assets/fonts/mont_heavydemo.eot');
+	src: local('mont_heavydemo'), local('mont_heavydemo'),
+			url('./assets/fonts/mont_heavydemo.eot?#iefix') format('embedded-opentype'),
+			url('./assets/fonts/mont_heavydemo.woff2') format('woff2'),
+			url('./assets/fonts/mont_heavydemo.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Mont';
 	src: url('./assets/fonts/Mont-Regular.eot');
 	src: local('Mont-Regular'), local('Mont-Regular'),
 			url('./assets/fonts/Mont-Regular.eot?#iefix') format('embedded-opentype'),
@@ -18,6 +28,7 @@
 	font-weight: 400;
 	font-style: normal;
 }
+
 @font-face {
 	font-family: 'Mont';
 	src: url('./assets/fonts/Mont-SemiBold.eot');
@@ -31,11 +42,11 @@
 
 @font-face {
 	font-family: 'Mont';
-	src: url('./assets/fonts/Mont-Regular-Italic.eot');
-	src: local('Mont-Regular-Italic'), local('Mont-Regular-Italic'),
-			url('./assets/fonts/Mont-Regular-Italic.eot?#iefix') format('embedded-opentype'),
-			url('./assets/fonts/Mont-Regular-Italic.woff2') format('woff2'),
-			url('./assets/fonts/Mont-Regular-Italic.woff') format('woff');
+	src: url('./assets/fonts/Mont-RegularItalic.eot');
+	src: local('Mont-RegularItalic'), local('Mont-RegularItalic'),
+			url('./assets/fonts/Mont-RegularItalic.eot?#iefix') format('embedded-opentype'),
+			url('./assets/fonts/Mont-RegularItalic.woff2') format('woff2'),
+			url('./assets/fonts/Mont-RegularItalic.woff') format('woff');
 	font-weight: 400;
 	font-style: italic;
 }

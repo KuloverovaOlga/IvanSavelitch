@@ -1,4 +1,7 @@
 .header {
+  position: relative;
+  z-index: 20;
+
   &--stub {
     & .header__inner {
       display: flex;
@@ -29,10 +32,82 @@
       }
     }
     & .header__text {
-        text-transform: lowercase;
+      text-transform: lowercase;
       @include small-tablet {
         display: none;
       }
+    }
+  }
+
+  // .header__inner
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.4rem 0 0;
+  }
+
+  // .header__logo
+
+  &__logo {
+  }
+
+  // .header__logo-img-box
+
+  &__logo-img-box {
+    width: 17.6rem;
+    height: 9.7rem;
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @include small-tablet {
+    }
+  }
+
+  // .header__nav
+
+  &__nav {
+    margin-left: -5.5rem;
+  }
+
+  // .header__nav-list
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    gap: 5.6rem;
+  }
+
+  // .header__nav-item
+
+  &__nav-item {
+  }
+
+  // .header__nav-link
+
+  &__nav-link {
+  }
+
+  // .header__btn-box
+
+  &__btn-box {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+  }
+
+  // .header__btn
+
+  &__btn {
+    width: 2.4rem;
+    height: 2.4rem;
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 }
