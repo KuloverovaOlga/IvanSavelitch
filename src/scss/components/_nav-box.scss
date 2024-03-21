@@ -1,0 +1,40 @@
+.nav-box {
+
+  // .nav-box__list-wrap
+
+  &__list-wrap {
+  }
+
+  // .nav-box__list
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+
+  }
+
+  // .nav-box__link
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    &:not(:last-child)::after {
+      display: inline-block;
+      content: '';
+      width: 2.8rem;
+      height: 2.8rem;
+      background: url(./assets/images/star.svg) no-repeat top/cover
+    }
+
+    @include small-tablet {
+      gap: 1.6rem;
+      &:not(:last-child)::after {
+        width: 0.8rem;
+        height: 0.8rem;
+      }
+    }
+  }
+}

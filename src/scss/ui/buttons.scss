@@ -6,3 +6,25 @@
   }
 }
 
+.swiper-button.swiper-button-next,
+.swiper-button.swiper-button-prev {
+  width: 6.6rem;
+  height: 6.6rem;
+  margin-top: 0;
+  transition: opacity 0.3s;
+  border-radius: 50%;
+  background-color: $white60;
+  &::after {
+    content: '';
+  }
+  & .swiper-button-svg-box {
+    width: 2.4rem;
+    height: 2.4rem;
+    & svg {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+}

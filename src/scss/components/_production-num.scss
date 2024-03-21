@@ -1,0 +1,42 @@
+.production-num {
+    padding: 8rem 0 15rem;
+
+    // .production-num__inner
+
+    &__inner {
+    }
+
+    // .production-num__list
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 15rem;
+        align-items: center;
+        width: 99.5rem;
+        margin: 0 auto;
+    }
+
+    // .production-num__item
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 7rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    // .production-num__num
+
+    &__num {
+        color: $dark-orange;
+    }
+
+    // .production-num__text
+
+    &__text {
+        line-height: 130%;
+    }
+}
+
