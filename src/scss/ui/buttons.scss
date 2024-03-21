@@ -27,6 +27,7 @@
     }
   }
 }
+
 .large-button {
   position: relative;
   display: flex;
@@ -35,6 +36,20 @@
   width: 26.2rem;
   height: 16.6rem;
   color: $orange;
+
+  &.cart {
+    &::before,
+    &::after {
+      width: 0.6rem;
+      height: 0.6rem;
+      background-image: url(../../assets/images/large-button-cart-star.svg);
+    }
+
+    .large-button__content {
+      text-align: center;
+      max-width: 9.4rem;
+    }
+  }
 
   &__background {
     position: absolute;
@@ -114,6 +129,35 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+}
+
+.like-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7.8rem;
+  height: 7.8rem;
+  border-radius: 12rem;
+  border: 0.2rem solid $white60;
+  transition: 0.2s ease-in-out;
+
+  svg {
+    width: 2.8rem;
+    height: 2.8rem;
+    transition: inherit;
+  }
+
+  &:hover {
+    background-color: $white70;
+    border: 0.4rem solid $white;
+
+    svg {
+      path {
+        fill: $orange;
+      }
     }
   }
 }

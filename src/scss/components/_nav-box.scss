@@ -1,4 +1,13 @@
 .nav-box {
+  &.dark {
+    .nav-box__link {
+      color: $white60;
+
+      &::after {
+        background-image: url(../../assets/images/star-dark.svg);
+      }
+    }
+  }
 
   // .nav-box__list-wrap
 
@@ -12,7 +21,6 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 2rem;
-
   }
 
   // .nav-box__link
@@ -26,7 +34,7 @@
       content: '';
       width: 2.8rem;
       height: 2.8rem;
-      background: url(./assets/images/star.svg) no-repeat top/cover
+      background: url(./assets/images/star.svg) no-repeat top/cover;
     }
 
     @include small-tablet {
