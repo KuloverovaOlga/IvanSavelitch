@@ -1,5 +1,4 @@
 .button {
-
   @include small-tablet {
     border-radius: 2.4rem;
     padding: 3.2rem 6.4rem;
@@ -24,6 +23,96 @@
       width: 100%;
       height: 100%;
       -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+}
+.large-button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26.2rem;
+  height: 16.6rem;
+  color: $orange;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__content {
+    position: relative;
+    max-width: 8.5rem;
+    z-index: 1;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.2rem;
+    height: 3.2rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(../../assets/images/large-button-star.svg);
+    z-index: 1;
+  }
+
+  &::before {
+    left: 2.2rem;
+  }
+
+  &::after {
+    right: 2.2rem;
+  }
+}
+
+.circle-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12rem;
+  height: 12rem;
+  overflow: hidden;
+  border: 0.4rem solid $white;
+  border-radius: 12rem;
+
+  svg {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  img {
+    width: 6.4rem;
+    height: 6.4rem;
+    object-fit: cover;
+  }
+
+  &.light-blue {
+    background-color: $light-blue;
+  }
+
+  &.orange {
+    background-color: $orange;
+  }
+
+  &.background {
+    img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
   }
