@@ -35,37 +35,92 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch {}
 });
 
-let durationScroll = 1.5;
+let durationScroll = 3;
 
 function animateHeader() {
-  let header = document.querySelector('.header:not(.header--stub):not(.header--main)');
-  let duration = 1.5;
+  let header = document.querySelector('.header');
+  const nav = header.querySelector('.header__nav');
+  const btnBox = header.querySelector('.header__btn-box');
+  const logo = header.querySelector('.header__logo');
 
   const tl = gsap.timeline();
-  tl.from(header, { y: '-85', duration: duration, ease: 'Ease-out' });
 
-  const headerMain = document.querySelector('.header--main');
-  if (headerMain) {
-    const nav = headerMain.querySelector('.header__nav');
-    const btnBox = headerMain.querySelector('.header__btn-box');
+  let duration = 3;
+
+  if (!header.classList.contains('header--stub') && !header.classList.contains('header--main')) {
     nav.style.opacity = 0;
     btnBox.style.opacity = 0;
-    setTimeout(() => {
-      nav.style.opacity = 1;
-      btnBox.style.opacity = 1;
-      tl.from(nav, { y: '-100', duration: duration, ease: 'Ease-out' }, `-=${duration}`).from(
+    logo.style.opacity = 0;
+    tl.from(nav, {
+      duration: duration,
+      ease: 'power2.inOut',
+      keyframes: {
+        '0%': { y: '-100', opacity: 0 },
+        '90%': { y: '5', opacity: 1 },
+        '100%': { y: '0' }
+      }
+    })
+      .from(
         btnBox,
-        { y: '-100', duration: duration, ease: 'Ease-out' },
+        {
+          duration: duration,
+          ease: 'power2.inOut',
+          keyframes: {
+            '0%': { y: '-100', opacity: 0 },
+            '90%': { y: '5', opacity: 1 },
+            '100%': { y: '0' }
+          }
+        },
+        `-=${duration}`
+      )
+      .from(
+        logo,
+        {
+          duration: duration,
+          ease: 'power2.inOut',
+          keyframes: {
+            '0%': { y: '-100', opacity: 0 },
+            '90%': { y: '5', opacity: 1 },
+            '100%': { y: '0' }
+          }
+        },
         `-=${duration}`
       );
-    }, 200);
+  } else if (header.classList.contains('header--main')) {
+    nav.style.opacity = 0;
+    btnBox.style.opacity = 0;
+    tl.from(nav, {
+      duration: duration,
+      ease: 'power2.inOut',
+      keyframes: {
+        '0%': { y: '-100', opacity: 0 },
+        '90%': { y: '5', opacity: 1 },
+        '100%': { y: '0' }
+      }
+    }).from(
+      btnBox,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { y: '-100', opacity: 0 },
+          '90%': { y: '5', opacity: 1 },
+          '100%': { y: '0' }
+        }
+      },
+      `-=${duration}`
+    );
   }
 }
 
 function animateFooter() {
-  const footerSvgWrapper = document.querySelector('.footer__svg-wrapper');
-  const footerSvgBox = document.querySelector('.footer__svg-box');
-  const footer = document.querySelector('footer:not(.footer--stub');
+  const footer = document.querySelector('.footer');
+  const footerSvgWrapper = footer.querySelector('.footer__svg-wrapper');
+  const footerSvgBox = footer.querySelector('.footer__svg-box');
+
+  if (!footer.classList.contains('.footer--stub') && footer) {
+
+
 
   let first = true;
   function handleFirstScroll() {
@@ -90,6 +145,7 @@ function animateFooter() {
       });
     }
   });
+}
 }
 
 function mainHero() {
@@ -278,7 +334,7 @@ function mainHero() {
 
   let section = document.querySelector('.main-hero');
 
-  section.style.opacity = 0;
+  // section.style.opacity = 0;
 
   let title = document.querySelector('.main-hero__title');
   let link = document.querySelector('.main-hero__link-swiper-box');
@@ -299,29 +355,156 @@ function mainHero() {
   let swiperBtnBox = document.querySelector('.main-hero__swiper-btn-box');
   let bg = document.querySelector('.main-hero__bg');
 
-  let duration = 1.5;
+  let duration = 3;
   const tl = gsap.timeline();
-  setTimeout(() => {
-    section.style.opacity = 1;
-    tl.from(title, { scale: '0', duration: duration, ease: 'Ease-in-out' })
-      .from(bg, { x: '-=300', y: '+=500', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-      .from(link, { scale: '0', y: '+=150', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-      .from(favorite, { x: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-      .from(titleBox, { x: '-=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-      .from(swiperBtnBox, { x: '-=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-      .from(
-        center,
-        { scale: '0', y: '+=150', x: '+=80', duration: duration, ease: 'Ease-in-out' },
-        `-=${duration}`
-      )
-      .from(thumbActive, { y: '+=250', x: '+=100', duration: 0.3, ease: 'Ease-in-out' }, `-=${duration}`)
-      .from(thumbNext, { y: '+=250', x: '+=100', duration: 0.5, ease: 'Ease-in-out' }, `-=${duration}`)
-      .from(
-        thumbNextNext,
-        { y: '+=250', x: '+=100', duration: duration, ease: 'Ease-in-out' },
-        `-=${duration}`
-      );
-  }, 200);
+  // setTimeout(() => {
+  // section.style.opacity = 1;
+  // tl.from(title, { scale: '0', duration: duration, ease: 'Ease-in-out' })
+  //   .from(bg, { x: '-=300', y: '+=500', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+  //   .from(link, { scale: '0', y: '+=150', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+  //   .from(favorite, { x: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+  //   .from(titleBox, { x: '-=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+  //   .from(swiperBtnBox, { x: '-=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+  //   .from(
+  //     center,
+  //     { scale: '0', y: '+=150', x: '+=80', duration: duration, ease: 'Ease-in-out' },
+  //     `-=${duration}`
+  //   )
+  //   .from(thumbActive, { y: '+=250', x: '+=100', duration: 0.3, ease: 'Ease-in-out' }, `-=${duration}`)
+  //   .from(thumbNext, { y: '+=250', x: '+=100', duration: 0.5, ease: 'Ease-in-out' }, `-=${duration}`)
+  //   .from(
+  //     thumbNextNext,
+  //     { y: '+=250', x: '+=100', duration: duration, ease: 'Ease-in-out' },
+  //     `-=${duration}`
+  //   );
+  // }, 200);
+
+  tl.from(title, {
+    duration: duration,
+    ease: 'power2.inOut',
+    keyframes: {
+      '0%': { scale: '0', opacity: 0 },
+      '90%': { scale: '1.05', opacity: 1 },
+      '100%': { scale: '1' }
+    }
+  })
+    .from(
+      bg,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { x: '-200', y: '400', opacity: 0 },
+          '90%': { x: '40', y: '40', opacity: 1 },
+          '100%': { x: '0', y: '0' }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      link,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { scale: '0', y: '150', opacity: 0 },
+          '90%': { scale: '1.05', y: '-5', opacity: 1 },
+          '100%': { scale: '1', y: 0 }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      favorite,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { x: '+=400', opacity: 0 },
+          '90%': { x: '-5', opacity: 1 },
+          '100%': { x: '0' }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      titleBox,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { x: '-=400', opacity: 0 },
+          '90%': { x: '+5', opacity: 1 },
+          '100%': { x: '0' }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      swiperBtnBox,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { x: '-=400', opacity: 0 },
+          '90%': { x: '+5', opacity: 1 },
+          '100%': { x: 0 }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      center,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { scale: '0', y: '+=150', x: '+=80', opacity: 0 },
+          '90%': { scale: '1.015 ', y: 0, x: 0, opacity: 1 },
+          '100%': { scale: '1', y: 0, x: 0 }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      thumbActive,
+      {
+        duration: 2.8,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { y: '+=150', x: '+=50', opacity: 0 },
+          '50%': { y: '-15', x: '0', opacity: 1 },
+          '100%': { y: '0', x: '0' }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      thumbNext,
+      {
+        duration: 2.9,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { y: '+=150', x: '+=50', opacity: 0 },
+          '50%': { y: '-15', x: '0', opacity: 1 },
+          '100%': { y: '0', x: '0' }
+        }
+      },
+      `-=${duration}`
+    )
+    .from(
+      thumbNextNext,
+      {
+        duration: duration,
+        ease: 'power2.inOut',
+        keyframes: {
+          '0%': { y: '+=150', x: '+=50', opacity: 0 },
+          '50%': { y: '-15', x: '0', opacity: 1 },
+          '100%': { y: '0', x: '0' }
+        }
+      },
+      `-=${duration}`
+    );
 }
 
 function aboutOurFarm() {
@@ -334,10 +517,20 @@ function aboutOurFarm() {
   let fav = document.querySelector('.about-our-farm__content-favorite-box');
   let img = document.querySelector('.about-our-farm__img-box');
   let link = document.querySelector('.about-our-farm__link');
+
+  title.style.opacity = '0';
+  leavesLeft.style.opacity = '0';
+  leavesRight.style.opacity = '0';
+  list.style.opacity = '0';
+  info.style.opacity = '0';
+  num.style.opacity = '0';
+  fav.style.opacity = '0';
+  img.style.opacity = '0';
+  link.style.opacity = '0';
+
   let section = document.querySelector('#about-our-farm');
   let first = true;
-  let duration = 1.5;
-  section.style.opacity = 0;
+  let duration = 3;
 
   function handleFirstScroll() {
     if (first) {
@@ -345,26 +538,150 @@ function aboutOurFarm() {
         duration: durationScroll,
         scrollTo: '#about-our-farm'
       });
-        section.style.opacity = 1;
-        gsap
-          .timeline()
-          .from(title, { x: '-=15%', y: '+=100%', duration: duration, ease: 'Ease-in-out' })
-          .from(
-            img,
-            { x: '+=15%', y: '+=10%', scale: 0.5, duration: duration, ease: 'Ease-in-out' },
-            `-=${duration}`
-          )
-          .from(link, { x: '+=15%', scale: 0.8, duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-          .from(list, { x: '-=30%', y: '+=60%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-          .from(leavesLeft, { x: '-=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-          .from(leavesRight, { x: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-          .from(info, { x: '-=30%', scale: 0.8, duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
-          .from(
-            num,
-            { x: '+=30%', y: '+=10%', scale: 0.8, duration: duration, ease: 'Ease-in-out' },
-            `-=${duration}`
-          )
-          .from(fav, { x: '+=30%', scale: 0.8, duration: duration, ease: 'Ease-in-out' }, `-=${duration}`);
+
+      // gsap
+      //   .timeline(    {
+
+      //   })
+      //   .from(title, { x: '-=15%', y: '+=100%', duration: duration, ease: 'Ease-in-out' })
+      //   .from(
+      //     img,
+      //     { x: '+=15%', y: '+=10%', scale: 0.5, duration: duration, ease: 'Ease-in-out' },
+      //     `-=${duration}`
+      //   )
+      //   .from(link, { x: '+=15%', scale: 0.8, duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+      //   .from(list, { x: '-=30%', y: '+=60%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+      //   .from(leavesLeft, { x: '-=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+      //   .from(leavesRight, { x: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+      //   .from(info, { x: '-=30%', scale: 0.8, duration: duration, ease: 'Ease-in-out' }, `-=${duration}`)
+      //   .from(
+      //     num,
+      //     { x: '+=30%', y: '+=10%', scale: 0.8, duration: duration, ease: 'Ease-in-out' },
+      //     `-=${duration}`
+      //   )
+      //   .from(fav, { x: '+=30%', scale: 0.8, duration: duration, ease: 'Ease-in-out' }, `-=${duration}`);
+      // first = false;
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top center'
+          }
+        })
+        .from(title, {
+          duration: duration,
+          ease: 'power2.inOut',
+          keyframes: {
+            '0%': { x: '-100', y: '200', opacity: 0 },
+            '90%': { x: '0', y: '-15', opacity: 1 },
+            '100%': { y: '0', x: '0' }
+          }
+        })
+        .from(
+          img,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '150', y: '100', scale: 0.5, opacity: 0 },
+              '90%': { y: '0', x: '0', scale: 1.05, opacity: 1 },
+              '100%': { y: '0', x: '0', scale: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          link,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '80', scale: 0.8, opacity: 0 },
+              '90%': { x: '0', scale: 1.05, opacity: 1 },
+              '100%': { x: '0', scale: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          list,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '-20', y: '60', opacity: 0 },
+              '90%': { x: '15', y: '-6', opacity: 1 },
+              '100%': { y: '0', x: '0' }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          leavesLeft,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '-400', opacity: 0 },
+              '90%': { x: '15', opacity: 1 },
+              '100%': { x: '0' }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          leavesRight,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '400', opacity: 0 },
+              '90%': { x: '15', opacity: 1 },
+              '100%': { x: '0' }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          info,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '-300', scale: 0.8, opacity: 0 },
+              '90%': { x: '15', scale: 1.05, opacity: 1 },
+              '100%': { x: '0', scale: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          num,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '300', y: '100', scale: 0.8, opacity: 0 },
+              '90%': { x: '0', y: '0', scale: 1.05, opacity: 1 },
+              '100%': { x: '0', y: '0', scale: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          fav,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '300', scale: 0.8, opacity: 0 },
+              '90%': { x: '15', scale: 1.05, opacity: 1 },
+              '100%': { scale: 1, x: '0' }
+            }
+          },
+          `-=${duration}`
+        );
       first = false;
     }
   }
@@ -373,7 +690,6 @@ function aboutOurFarm() {
     '(prefers-reduced-motion: no-preference)': function () {
       ScrollTrigger.create({
         trigger: '.about-our-farm',
-        // start: 'top bottom',
         start: window.screen.width > 768 ? 'top 80%' : 'top 60%',
         toggleActions: 'play pause resume reverse',
         onEnter: () => handleFirstScroll()
@@ -410,29 +726,110 @@ function latestNews() {
   let title = document.querySelector('.latest-news__title');
   let link = document.querySelector('.latest-news__link');
   let slides = document.querySelectorAll('.latest-news__swiper-slide-inner');
+  let section = document.querySelector('#latest-news');
 
-  document.querySelector('.latest-news__title-box').style.opacity = 0;
-  document.querySelector('.latest-news__swiper-box').style.opacity = 0;
+  title.style.opacity = '0';
+  link.style.opacity = '0';
+  slides.forEach((slide) => (slide.style.opacity = '0'));
+
   let first = true;
-  let duration = 1.5;
+  let duration = 3;
 
   function handleFirstScroll() {
     if (first) {
       gsap.to(window, {
         duration: durationScroll,
-        scrollTo: { y: '#latest-news', offsetY: -rem(20) } // Прокрутка к элементу с учетом отступа
+        scrollTo: { y: '#latest-news', offsetY: -rem(28) } // Прокрутка к элементу с учетом отступа
       });
-
-        document.querySelector('.latest-news__title-box').style.opacity = 1;
-        document.querySelector('.latest-news__swiper-box').style.opacity = 1;
-        gsap
-          .timeline()
-          .from(title, { x: '-=100%', duration: duration, ease: 'Ease-out' })
-          .from(link, { x: '+=100%', duration: duration, ease: 'Ease-out' }, `-=${duration}`)
-          .from(slides[0], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration + 0.6}`)
-          .from(slides[1], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration + 0.4}`)
-          .from(slides[2], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration + 0.2}`)
-          .from(slides[3], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`);
+      // gsap
+      //   .timeline()
+      //   .from(title, { x: '-=100%', duration: duration, ease: 'Ease-out' })
+      //   .from(link, { x: '+=100%', duration: duration, ease: 'Ease-out' }, `-=${duration}`)
+      //   .from(slides[0], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration + 0.6}`)
+      //   .from(slides[1], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration + 0.4}`)
+      //   .from(slides[2], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration + 0.2}`)
+      //   .from(slides[3], { y: '+=100%', duration: duration, ease: 'Ease-in-out' }, `-=${duration}`);
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top center'
+          }
+        })
+        .from(title, {
+          duration: duration,
+          ease: 'power2.inOut',
+          keyframes: {
+            '0%': { x: '-400', opacity: 0 },
+            '90%': { x: '25', opacity: 1 },
+            '100%': { x: '0' }
+          }
+        })
+        .from(
+          link,
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { x: '400', opacity: 0 },
+              '90%': { x: '-25', opacity: 1 },
+              '100%': { x: '0' }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          slides[0],
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { y: '400', opacity: 0 },
+              '90%': { y: '-25', opacity: 1 },
+              '100%': { y: '0' }
+            }
+          },
+          `-=${duration + 0.4}`
+        )
+        .from(
+          slides[1],
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { y: '400', opacity: 0 },
+              '90%': { y: '-25', opacity: 1 },
+              '100%': { y: '0' }
+            }
+          },
+          `-=${duration + 0.3}`
+        )
+        .from(
+          slides[2],
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { y: '500', opacity: 0 },
+              '90%': { y: '-25', opacity: 1 },
+              '100%': { y: '0' }
+            }
+          },
+          `-=${duration + 0.2}`
+        )
+        .from(
+          slides[3],
+          {
+            duration: duration,
+            ease: 'power2.inOut',
+            keyframes: {
+              '0%': { y: '500', opacity: 0 },
+              '90%': { y: '-25', opacity: 1 },
+              '100%': { y: '0' }
+            }
+          },
+          `-=${duration}`
+        );
 
       first = false;
     }
