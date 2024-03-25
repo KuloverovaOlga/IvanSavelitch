@@ -13,6 +13,10 @@
   transition: opacity 0.3s;
   border-radius: 50%;
   background-color: $white60;
+  @include small-tablet {
+    width: 10rem;
+    height: 10rem;
+  }
   &::after {
     content: '';
   }
@@ -24,6 +28,10 @@
       height: 100%;
       -o-object-fit: cover;
       object-fit: cover;
+    }
+    @include small-tablet {
+      width: 4.8rem;
+      height: 4.8rem;
     }
   }
 }

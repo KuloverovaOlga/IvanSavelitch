@@ -2,6 +2,10 @@
   position: relative;
   z-index: 20;
 
+  @include small-tablet {
+    display: none;
+  }
+
   &--stub {
     & .header__inner {
       display: flex;
@@ -71,7 +75,6 @@
 
   &__nav {
     margin-left: -5.5rem;
-
   }
 
   // .header__nav-list

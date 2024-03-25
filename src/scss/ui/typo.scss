@@ -59,6 +59,15 @@
     line-height: 116%;
   }
 }
+.txt20 {
+  font-family: 'Steelfish';
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 100%;
+  letter-spacing: 0.01em;
+  @include small-tablet {
+  }
+}
 .txt18 {
   font-family: 'Mont';
   font-weight: 400;
