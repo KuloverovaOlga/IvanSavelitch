@@ -1,14 +1,23 @@
 .main-hero {
-  // margin-top: -15.5rem;
+  margin: 0 0 20rem;
+  // margin: -15.5rem 0 0;
   // padding: 15.5rem 6rem;
-  padding-bottom: 6rem;
+
+  // padding-bottom: 10rem;
   // .main-hero__inner
+
+  @include small-tablet {
+    padding-bottom: 15rem;
+  }
 
   &__inner {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 8rem;
+    @include small-tablet {
+      gap: 0;
+    }
   }
 
   // .main-hero__bg
@@ -26,6 +35,9 @@
 
   &__title {
     text-align: center;
+    @include small-tablet {
+      font-size: 16rem;
+    }
   }
 
   // .main-hero__swipers-wrapper
@@ -33,16 +45,33 @@
   &__swipers-wrapper {
     position: relative;
     height: 48rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    @include small-tablet {
+      height: fit-content;
+      padding-top: 54rem;
+      gap: 5.6rem;
+    }
   }
 
   // .main-hero__favorites-swiper-box
 
   &__favorites-swiper-box {
-    position: absolute;
-    right: 0;
-    top: 0;
     width: 34.6rem;
     z-index: 10;
+    align-self: start;
+    justify-self: end;
+
+    @include small-tablet {
+      grid-row: 3/4;
+      grid-column: 1/3;
+      @include small-tablet {
+        margin-top: 10.4rem;
+        align-self: center;
+        justify-self: start;
+        width: 68.6rem;
+      }
+    }
   }
 
   // .main-hero__favorites-swiper
@@ -67,6 +96,10 @@
     flex-direction: column;
     gap: 2.4rem;
     align-items: flex-end;
+    @include small-tablet {
+      align-items: center;
+      gap: 4.8rem;
+    }
   }
 
   // .main-hero__favorites-swiper-slide-btn
@@ -86,6 +119,11 @@
         }
       }
     }
+    @include small-tablet {
+      width: 14rem;
+      height: 14rem;
+      border: 0.4rem solid $white60;
+    }
   }
 
   // .main-hero__favorites-swiper-slide-btn-svg-box
@@ -101,6 +139,10 @@
         transition: fill 0.3s;
       }
     }
+    @include small-tablet {
+      width: 5.6rem;
+      height: 5.6rem;
+    }
   }
 
   // .main-hero__favorites-swiper-text
@@ -108,6 +150,10 @@
   &__favorites-swiper-text {
     text-align: right;
     line-height: 130%;
+    @include small-tablet {
+      font-size: 3.2rem;
+      text-align: center;
+    }
   }
 
   // .main-hero__link-swiper-box
@@ -182,6 +228,11 @@
     margin-top: -14rem;
     width: 100%;
     margin-left: -8.8rem;
+    @include small-tablet {
+      margin: 0 -4rem;
+      width: 75rem;
+      margin-top: -5rem;
+    }
   }
 
   // .main-hero__center-swiper
@@ -192,20 +243,27 @@
   // .main-hero__center-swiper-wrapper
 
   &__center-swiper-wrapper {
+    @include small-tablet {
+      padding-bottom: 20rem;
+    }
   }
 
   // .main-hero__center-swiper-slide
 
   &__center-swiper-slide {
-    &:nth-child(2) {
-    }
-    &.swiper-slide-prev {
+    @include small-tablet {
+      align-items: center;
+      justify-content: center;
+      display: flex !important;
+      & .main-hero__center-swiper-slide-img-box {
+        scale: 1 !important;
+        opacity: 1 !important;
+      }
     }
     &.swiper-slide-active {
       .main-hero__center-swiper-slide-img-box {
         scale: 1;
         opacity: 1;
-        // transform-origin: left bottom;
       }
     }
     &.swiper-slide-active ~ .swiper-slide {
@@ -213,7 +271,6 @@
         scale: 0.1;
         opacity: 0;
         opacity: 0.3;
-        // transform-origin: left bottom;
       }
     }
   }
@@ -230,23 +287,26 @@
     height: 60rem;
     scale: 0.5;
     opacity: 0;
-    // transform-origin: center center;
-    // transition: opacity 0.7s, scale 1s;
+
     & img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+    @include small-tablet {
+      width: 46.2rem;
+      height: 47.6rem;
     }
   }
 
   // .main-hero__thumb-swiper-box
 
   &__thumb-swiper-box {
-    position: absolute;
-    right: 0;
+    position: relative;
     width: 34.4rem;
-    bottom: 0;
     z-index: 10;
+    align-self: end;
+    justify-self: end;
     &::before {
       content: '';
       position: absolute;
@@ -255,6 +315,13 @@
       bottom: 0;
       left: 11rem;
       background-color: $orange;
+    }
+    @include small-tablet {
+      &::before {
+        display: none;
+      }
+      width: 45rem;
+      margin-left: -9rem;
     }
   }
 
@@ -307,6 +374,12 @@
     &--black {
       background-color: #654c3b;
     }
+
+    @include small-tablet {
+      width: 14rem;
+      height: 14rem;
+      border: 0.4rem solid $white;
+    }
   }
 
   // .main-hero__thumb-swiper-slide-img-box
@@ -327,16 +400,25 @@
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     z-index: 10;
+    align-self: end;
+    @include small-tablet {
+      grid-column: 1/3;
+      grid-row: 1/2;
+      align-items: center;
+      text-align: center;
+      align-self: center;
+      width: 68.6rem;
+    }
   }
 
   // .main-hero__stat-swiper-box
 
   &__stat-swiper-box {
     width: 80rem;
+    @include small-tablet {
+      width: 68.6rem;
+    }
   }
 
   // .main-hero__stat-swiper
@@ -362,6 +444,10 @@
   // .main-hero__stat-swiper-slide-text
 
   &__stat-swiper-slide-text {
+    @include small-tablet {
+      color: $white60;
+      font-size: 3.2rem;
+    }
   }
 
   // .main-hero__title-swiper-wrapper
@@ -374,6 +460,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.6em;
+    @include small-tablet {
+    }
   }
 
   // .main-hero__title-swiper-box
@@ -381,6 +469,9 @@
   &__title-swiper-box {
     width: 80rem;
     height: 7rem;
+    @include small-tablet {
+      width: 68.6rem;
+    }
   }
 
   // .main-hero__title-swiper
@@ -402,12 +493,18 @@
   // .main-hero__title-swiper-slide-title
 
   &__title-swiper-slide-title {
+    @include small-tablet {
+      font-size: 6rem;
+    }
   }
 
   // .main-hero__weight-swiper-box
 
   &__weight-swiper-box {
     width: 80rem;
+    @include small-tablet {
+      width: 68.6rem;
+    }
   }
 
   // .main-hero__weight-swiper
@@ -434,6 +531,9 @@
 
   &__weight-swiper-slide-text {
     line-height: 130%;
+    @include small-tablet {
+      font-size: 4.8rem;
+    }
   }
 
   // .main-hero__swiper-btn-box
@@ -442,14 +542,13 @@
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    position: absolute;
     z-index: 15;
-    bottom: 49.9rem;
-    right: 16.8rem;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 40rem;
+    align-self: start;
+    @include small-tablet {
+      align-self: center;
+      gap: 2rem;
+    }
   }
 
   // .main-hero__swiper-btn
