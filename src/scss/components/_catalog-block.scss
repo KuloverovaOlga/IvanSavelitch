@@ -152,7 +152,7 @@
       &:first-child {
         order: 3;
         transform: rotateZ(-10deg);
-        margin: 0;
+        margin: 0 -1rem 0 0;
       }
 
       &:nth-child(2) {
@@ -176,13 +176,13 @@
       &:nth-child(5) {
         order: 4;
         transform: rotateZ(-8deg);
-        margin: 0 1rem 0 3rem;
+        margin: 0 1rem 0 2rem;
       }
 
       &:last-child {
         order: 2;
         transform: rotateZ(4deg);
-        margin: 0 1rem 3rem 0;
+        margin: 0 0 3rem -1rem;
       }
     }
 
@@ -230,11 +230,11 @@
 
         & > div {
           &:first-child {
-            width: auto;
+            width: 22rem;
           }
 
           &:last-child {
-            width: 26.6rem;
+            width: 25.6rem;
             font-size: 3.2rem;
             line-height: 4rem;
           }
