@@ -1,0 +1,158 @@
+.lk {
+    margin-top: 8.8rem;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+    &-sidebar {
+        &_box {
+            margin-bottom: 20rem;
+
+            &-bottom {
+                display: block;
+                font-weight: 700;
+                letter-spacing: 0.02em;
+            }
+            &-list {
+                display: flex;
+                flex-direction: column;
+                gap: 4rem;
+            }
+            &-link {
+                &.active {
+                    border-bottom: 2px solid #FFF;
+                    padding-bottom: 0.6rem;
+                }
+
+                &:last-child {
+                    margin-top: 16rem;
+                }
+            }
+        }
+    }
+    &-container {
+        width: 144.7rem;
+
+        &--main {
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            padding: 6rem;
+            border-radius: 6rem;
+            background: #FFF;
+            border: 2px solid rgba(193, 72, 36, 1);
+        }
+    }
+    &-main {
+        &_title {
+            color: rgba(193, 72, 36, 1);   
+        }
+        &_save {
+            cursor: pointer;
+            width: fit-content;
+            color: rgba(197, 193, 221, 1);
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid rgba(197, 193, 221, 1);
+
+            &:hover {
+                color: rgba(193, 72, 36, 1);
+                border-bottom: 2px solid rgba(193, 72, 36, 1);
+            }
+        }
+    }
+}
+
+@include small-tablet {
+    .lk {
+        margin-top: 8.8rem;
+    
+        .container {
+            flex-direction: column;
+            gap: 4rem;
+        }
+        &-sidebar {
+            &_box {
+                margin-bottom: 4rem;
+                background: rgba(193, 72, 36, 1);
+                border-radius: 7rem;
+                padding: 3.2rem 4.8rem;
+
+                &-top {
+                    font-weight: 700;
+                    font-size: 3.2rem;
+                    letter-spacing: 0.02em;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+
+                    &.active {
+                        svg {
+                            transform: rotateZ(-180deg);
+                        }
+                        span {
+                            border-bottom: 2px solid #FFF;
+                        }
+                    }
+
+                    svg {
+                        transition: transform 700ms ease-in-out;
+                        width: 3.2rem;
+                        height: 3.2rem;
+                    }
+                    span {
+                        padding-bottom: 0.6rem;
+                        border-bottom: 2px solid rgba(255, 255, 255, 0);
+                    }
+                }
+    
+                &-bottom {
+                    display: none;
+                    font-size: 3.2rem;
+                }
+                &-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4rem;
+                    margin-top: 4rem;
+                }
+                &-link {
+                    &.active {
+                        display: none;
+                    }
+                    &:last-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+        &-container {
+            width: 100%;
+    
+            &--main {
+                gap: 0;
+                padding: 8rem 5.2rem;
+                border-radius: 10rem;
+                background: #FFF;
+
+                .cart-order_block {
+                    margin-bottom: 5.2rem;
+                }
+            }
+        }
+        &-main {
+            &_title {
+                color: rgba(193, 72, 36, 1);
+                margin-bottom: 6rem;
+                font-size: 5.2rem;
+            }
+            &_save {
+                padding-bottom: 1.2rem;
+                margin-top: 0.8rem;
+                font-weight: 700;
+                font-size: 3.2rem;
+                letter-spacing: 0.02em;
+            }
+        }
+    }
+}

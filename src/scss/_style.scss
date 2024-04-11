@@ -52,4 +52,35 @@ section {
   }
 }
 
+.bc {
+  width: 174.4rem;
+  margin: 5.2rem auto 0;
+  display: flex;
+  gap: 1.8rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    &::after {
+      content: '';
+      display: block;
+      width: 2.8rem;
+      height: 2.8rem;
+      background: url('../../assets/images/star-brown.svg');
+      background-size: contain;
+    }
+    &:last-child {
+      &::after {
+        content: none;
+      }
+    }
+  }
+}
+@media (max-width: 48em) {
+  .bc {
+    display: none;
+  }
+}
+
 @import './ui/ui';
