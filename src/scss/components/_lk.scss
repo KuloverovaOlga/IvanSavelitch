@@ -43,6 +43,127 @@
             background: #FFF;
             border: 2px solid rgba(193, 72, 36, 1);
         }
+        &_title {
+            margin-bottom: 6rem;
+        }
+        &_switcher {
+            display: flex;
+            gap: 3.3rem;
+            align-items: center;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 6rem;
+
+            &-btn {
+                cursor: pointer;
+            }
+
+            &-btn.active {
+                background: rgba(197, 193, 221, 1);
+                border-radius: 5rem;
+                padding: 1.2rem 1.6rem 1rem;
+            }
+        }
+        &_purchases {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            &-item {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto auto;
+                padding: 4rem;
+                border-radius: 5rem;
+                border: 2px solid #FFF;
+                background: rgba(193, 72, 36, 1);
+
+                &--status {
+                    display: flex;
+                    gap: 3rem;
+                    align-items: center;
+                    font-weight: 700;
+                    letter-spacing: 0.02em;
+                    margin-bottom: 5rem;
+
+                    span:first-child {
+                        background: rgba(197, 193, 221, 1);
+                        border-radius: 5rem;
+                        padding: 1.2rem 1.6rem 1rem;
+                    }
+
+                    &.delivery {
+                        span:first-child {
+                            background: rgba(151, 212, 129, 1);
+                        }
+                    }
+                    &.created {
+                        span:first-child {
+                            background: rgba(214, 105, 72, 1);
+                        }
+                    }
+                    &.done {
+                        span:first-child {
+                            background: rgba(209, 88, 52, 1);
+                        }
+                    }
+                }
+                &--delivery {
+                    display: flex;
+                    gap: 2rem;
+                    width: fit-content;
+                    margin-left: auto;
+
+                    span:first-child {
+                        color: rgba(255, 255, 255, 0.6);
+                    }
+                }
+                &--number {
+                    margin-bottom: 2rem;
+                }
+                &--position {
+                    grid-row: 3;
+                    font-weight: 700;
+                    letter-spacing: 0.02em;
+                    margin-bottom: 3rem;
+                }
+                &--price {
+                    grid-row: 4;
+                }
+                &--swiper {
+                    grid-column: 2;
+                    grid-row: 2/5;
+                    height: fit-content;
+                    margin-top: auto;
+                    margin-left: auto;
+
+                    .swiper-slide {
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 10rem;
+                        height: 10rem;
+                        border-radius: 100%;
+                        background: #FFF;
+        
+                        img {
+                            width: 5rem;
+                            height: 5rem;
+                            object-fit: contain;
+                        }
+                        span {
+                            font-weight: 700;
+                            letter-spacing: 0.02em;
+                            position: absolute;
+                            left: 50%;
+                            bottom: 0.25rem;
+                            transform: translateX(-50%);
+                            color: rgba(209, 88, 52, 1);
+                        }
+                    }
+                }
+            }
+        }
     }
     &-main {
         &_title {
@@ -60,6 +181,14 @@
                 border-bottom: 2px solid rgba(193, 72, 36, 1);
             }
         }
+    }
+}
+
+.switcher__content {
+    display: none;
+
+    &.active {
+        display: block;
     }
 }
 
@@ -137,6 +266,93 @@
 
                 .cart-order_block {
                     margin-bottom: 5.2rem;
+                }
+            }
+            &_title {
+                margin-bottom: 4rem;
+                font-size: 5.2rem;
+                line-height: 120%;
+            }
+            &_switcher {
+                gap: 3.2rem;
+                font-size: 3.2rem;
+                margin-bottom: 4rem;
+    
+                &-btn.active {
+                    border-radius: 200rem;
+                    padding: 2.6rem 3.6rem 2.4rem 3.6rem;
+                }
+            }
+            &_purchases {
+                gap: 4rem;
+                &-item {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: initial;
+                    padding: 5.2rem 3.1rem;
+                    border-radius: 10rem;
+    
+                    &--status {
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 0;
+                        font-size: 3.2rem;
+                        margin: 0 1.6rem 4rem;
+    
+                        span:first-child {
+                            border-radius: 200rem;
+                            padding: 2.6rem 3.6rem 2.4rem 3.6rem;
+                        }
+                    }
+                    &--delivery {
+                        grid-row: 3;
+                        display: flex;
+                        flex-direction: column;
+                        margin-left: 0;
+                        gap: 1.2rem;
+                        font-size: 3.2rem;
+                        margin: 0 1.6rem 4rem;
+
+                        span:first-child {
+                            font-weight: 600;
+                        }
+                    }
+                    &--number {
+                        font-size: 4.8rem;
+                        margin: 0 1.6rem 4rem;
+                    }
+                    &--position {
+                        grid-row: initial;
+                        font-weight: 600;
+                        font-size: 3.2rem;
+                        margin: 0 1.6rem 4rem;
+                    }
+                    &--price {
+                        font-size: 5.2rem;
+                        grid-row: initial;
+                        margin: 0 1.6rem 4rem;
+                    }
+                    &--swiper {
+                        grid-column: initial;
+                        grid-row: initial;
+                        height: fit-content;
+                        margin-top: 0;
+                        margin-left: 0;
+                        overflow: hidden;
+    
+                        .swiper-slide {
+                            width: 14rem;
+                            height: 14rem;
+            
+                            img {
+                                width: 7rem;
+                                height: 7rem;
+                            }
+                            span {
+                                font-size: 3.2rem;
+                                bottom: 0.8rem;
+                            }
+                        }
+                    }
                 }
             }
         }
