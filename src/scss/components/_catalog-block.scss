@@ -248,3 +248,200 @@
     }
   }
 }
+
+.catalog-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 26.5rem;
+  column-gap: 4.5rem;
+}
+.catalog-item {
+  position: relative;
+  background: rgba(209, 88, 52, 1);
+  border: 2px solid #FFF;
+  border-radius: 6rem;
+
+  &_top {
+    position: absolute;
+    width: 35.4rem;
+    height: 36rem;
+    top: -17.5rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    &--back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &--img {
+      position: absolute;
+      width: 23rem;
+      height: 23.1rem;
+      top: -6.1rem;
+      right: 3.2rem;
+      z-index: 1;
+
+      img {
+        object-fit: contain;
+      }
+    }
+    &--like {
+      position: absolute;
+      bottom: 30.5rem;
+      left: 4.5rem;
+      cursor: pointer;
+
+      svg {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+    }
+    &--name {
+      width: fit-content;
+      position: absolute;
+      bottom: 4rem;
+      z-index: 1;
+      color: rgb(209, 88, 52);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      height: 8.8rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+  &_bottom {
+    margin: 20rem 4rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--left {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+
+      svg {
+        width: 7.4rem;
+        height: 7.4rem;
+      }
+    }
+    &--price {
+      display: flex;
+    }
+
+    &--info {
+      width: 18.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.7rem;
+
+      .txt18 {
+        line-height: 150%;
+        font-weight: 600;
+      }
+      .txt16 {
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+}
+
+@include small-tablet {
+  .catalog-list {
+    grid-template-columns: 1fr;
+    row-gap: 26.5rem;
+    column-gap: 0;
+  }
+  .catalog-item {
+    border-radius: 12rem;
+  
+    &_top {
+      width: 56.4rem;
+      height: 57.4rem;
+      top: -16.8rem;
+
+      &--img {
+        position: absolute;
+        width: 30.2rem;
+        height: 31.4rem;
+        top: -3rem;
+        right: 9.8rem;
+      }
+      &--like {
+        bottom: auto;
+        top: 5rem;
+        left: 7rem;
+  
+        svg {
+          width: 4.8rem;
+          height: 4.8rem;
+        }
+      }
+      &--name {
+        bottom: 4rem;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        height: 13.8rem;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        font-size: 5.6rem;
+        letter-spacing: 0.01em;
+      }
+    }
+    &_bottom {
+      margin: 44.8rem 6rem 6rem;
+      align-items: initial;
+  
+      &--left {
+        gap: 4rem;
+
+        svg {
+          width: 14.8rem;
+          height: 14.8rem;
+        }
+      }
+      &--price {
+        display: flex;
+        font-weight: 400;
+        font-size: 6rem;
+
+        span {
+          font-weight: 600;
+          font-size: 3.6rem;
+          letter-spacing: 0.02em;
+        }
+      }
+  
+      &--info {
+        width: 30.2rem;
+        gap: 4rem;
+  
+        .txt18 {
+          line-height: initial;
+          font-weight: 600;
+          font-size: 3.2rem;
+          letter-spacing: 0.02em;
+        }
+        .txt16 {
+          font-weight: 600;
+          font-size: 3.2rem;
+          letter-spacing: 0.02em;
+        }
+      }
+    }
+  }
+}
