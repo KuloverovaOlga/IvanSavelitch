@@ -1,5 +1,8 @@
 .about-our-farm {
     transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
   // .about-our-farm__inner
 
   &__inner {

@@ -1,4 +1,7 @@
 .latest-news {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
 
   &__container {
     max-width: 192rem;
@@ -19,12 +22,12 @@
     padding: 32.5rem 8.8rem 0;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    // gap: 0rem;
     @include small-tablet {
       padding: 35.8rem 4rem 0;
       min-height: 200rem;
       background: url(./assets/images/latest-news-bg-mob.svg) no-repeat top/cover;
-      gap: 6.4rem;
+      // gap: 6.4rem;
     }
   }
 
@@ -117,8 +120,9 @@
 
   &__swiper-wrapper {
     padding-bottom: 8rem;
-    padding-top: 3rem ;
+    padding-top: 6rem ;
     @include small-tablet {
+      padding-top: 6.4rem ;
     }
   }
 
