@@ -5,6 +5,7 @@
   padding-top: 32.5rem !important;
   @include small-tablet {
     height: fit-content !important;
+    padding-top: 0 !important;
      }
   &__container {
     max-width: 192rem;
@@ -40,10 +41,12 @@
     }
     // gap: 0rem;
     @include small-tablet {
-      padding: 35.8rem 4rem 0;
+      padding: 0 4rem ;
       min-height: 200rem;
-      background: url(./assets/images/latest-news-bg-mob.svg) no-repeat top/cover;
       // gap: 6.4rem;
+      &::before {
+        top: -42.5rem;
+      }
     }
   }
 
