@@ -1,8 +1,11 @@
 .about-our-farm {
-    transition: opacity 0.3s;
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
+  height: 100%  !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 32.5rem;
+  @include small-tablet {
+    height: fit-content !important;
+     }
   // .about-our-farm__inner
 
   &__inner {
@@ -50,7 +53,8 @@
       width: 67rem;
       height: 46.4rem;
       top: -15.2rem;
-      transform: scaleX(-1);    }
+      transform: scaleX(-1);
+    }
   }
 
   // .about-our-farm__title-img-box--right

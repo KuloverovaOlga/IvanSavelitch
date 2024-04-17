@@ -1,7 +1,8 @@
 .footer {
-  opacity: 0;
+  &--anim {
+    // opacity: 0;
+  }
   &--stub {
-    opacity: 1;
     // .footer__container
 
     & .footer__container {

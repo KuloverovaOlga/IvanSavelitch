@@ -3,19 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="https://unpkg.com/fullpage.js/dist/fullpage.min.js"></script>
     <title>Главная</title>
   </head>
   <body>
     <div class="wrapper">
-      <include src="./components/_header.html" data-text='{"header": { "class": "header--main"}}'></include>
-      <main>
+      <main class="main-home" id="fullpage">
+        <include src="./components/_header.html" data-text='{"header": { "class": "header--main"}}'></include>
         <include src="./components/_main-hero.html"></include>
-        <include src="./components/_catalog-block.html"></include>
+        <include src="./components/_catalog-block.html" ></include>
         <include src="./components/_love.html"></include>
         <include src="./components/_about-our-farm.html"></include>
         <include src="./components/_latest-news.html"></include>
+        <include src="./components/_footer.html" data-text='{"footer": { "class": "footer--anim" } }'></include>
       </main>
-      <include src="./components/_footer.html"></include>
     </div>
   </body>
 </html>

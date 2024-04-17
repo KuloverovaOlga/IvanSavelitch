@@ -1,9 +1,17 @@
 .header {
   position: relative;
   z-index: 20;
+  &--main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+  }
+
 
   @include small-tablet {
-    display: none;
+    // display: none;
   }
 
   &--stub {
