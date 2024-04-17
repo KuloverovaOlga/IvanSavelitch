@@ -8,11 +8,9 @@ $(".cart-order_top").on("click", function() {
     $(this).siblings('.cart-order_bottom').slideToggle("slow")
 });
 
-$( function() {
-    $( ".form_input-select").find('select').selectmenu();
-});
+$( ".form_input-select").find('select').selectmenu();
 
-const textSwiper = new Swiper('.cart__info-swiper', {
+const cartInfoSwiper = new Swiper('.cart__info-swiper', {
     slidesPerView: 'auto',
     spaceBetween: rem(3),
 
@@ -21,4 +19,4 @@ const textSwiper = new Swiper('.cart__info-swiper', {
         spaceBetween: (20),
       }
     },
-  });
+});

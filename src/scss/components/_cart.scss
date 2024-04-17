@@ -553,19 +553,24 @@
 }
 .ui-selectmenu-menu.ui-front {
     .ui-widget.ui-widget-content {
-        border: 1px solid rgba(197, 193, 221, 1);
-        border-radius: 1rem;
-    }
-    .ui-menu-item {
-        border-bottom: 2px solid rgba(197, 193, 221, 1);
+        border: none;
+        border-radius: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
+        background: rgba(193, 72, 36, 1);
+        padding: 3.2rem;
 
-        &:last-child {
-            border-bottom: none;
+        .ui-state-disabled {
+            display: none;
         }
     }
+    .ui-menu-item {
+        border-bottom: none;
+    }
     .ui-menu-item-wrapper {
-        color: rgba(193, 72, 36, 1);
-        padding: 0.5rem;
+        color: #FFF;
+        padding: 0;
         
     }
     font-size: 1.6rem;
