@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollToPlugin);
 
   if (document.querySelector('.main-home')) {
-    animateHeader();
+    animateHeader(duration, ease);
     mainHeroSwiper();
-    mainHeroAnim();
-    aboutOurfarmFavorite() 
-    latestNewsSwiper() 
+    mainHeroAnim(duration, ease);
+    aboutOurfarmFavorite();
+    latestNewsSwiper();
     if (window.innerWidth > 767) {
       let executedFunctions = {};
 
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollingSpeed: 1500,
         scrollOverflow: false,
         fitToSection: false,
+        bigSectionsDestination: 'top',
         // afterLoad
         // onLeave
         onLeave: function (origin, destination, direction, trigger) {
@@ -35,15 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
             destination.anchor == 'catalog-block' &&
             direction == 'down'
           ) {
-            catalogBannerAnimation(duration);
+            catalogBannerAnimation(duration, ease);
             executedFunctions[destination.anchor] = true;
           }
-          if (
-            !executedFunctions[destination.anchor] &&
-            destination.anchor == 'love' &&
-            direction == 'down'
-          ) {
-            loveAnimation(duration);
+          if (!executedFunctions[destination.anchor] && destination.anchor == 'love' && direction == 'down') {
+            loveAnimation(duration, ease);
             executedFunctions[destination.anchor] = true;
           }
 
@@ -52,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             destination.anchor == 'about-our-farm' &&
             direction == 'down'
           ) {
-            aboutOurFarmAnim(duration);
+            aboutOurFarmAnim(duration, ease);
             executedFunctions[destination.anchor] = true;
           }
           if (
@@ -60,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             destination.anchor == 'latest-news' &&
             direction == 'down'
           ) {
-            latestNewsAnim(duration);
+            latestNewsAnim(duration, ease);
             executedFunctions[destination.anchor] = true;
           }
           if (
@@ -68,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             destination.anchor == 'footer' &&
             direction == 'down'
           ) {
-            animateFooter(duration);
+            animateFooter(duration, ease);
             executedFunctions[destination.anchor] = true;
           }
         }
@@ -76,17 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       gsap.to(window, { duration: 0.5, scrollTo: '.header' });
       setTimeout(() => {
-        aboutOurFarmAnimMob(duration);
-        latestNewsAnimMob(duration);
-        animateFooterMob(duration);
-      }, 150);
+        catalogBannerAnimationMob(duration, ease);
+        loveAnimationMob(duration, ease);
+        aboutOurFarmAnimMob(duration, ease);
+        latestNewsAnimMob(duration, ease);
+        animateFooterMob(duration, ease);
+      }, 500);
     }
   }
 });
 
-let duration = 2.5;
+let duration = 3;
+let centerAnim = window.innerWidth > 768 ? '90%'  : '40%';
+let ease = 'power2.inOut';
 
-function animateHeader() {
+function animateHeader(duration, ease) {
   let header = document.querySelector('.header');
   const nav = header.querySelector('.header__nav');
   const btnBox = header.querySelector('.header__btn-box');
@@ -94,18 +95,16 @@ function animateHeader() {
 
   const tl = gsap.timeline();
 
-  let duration = 3;
-
   if (header.classList.contains('header--anim')) {
     nav.style.opacity = 0;
     btnBox.style.opacity = 0;
     logo.style.opacity = 0;
     tl.from(nav, {
       duration: duration,
-      ease: 'power2.inOut',
+      ease,
       keyframes: {
         '0%': { y: '-100', opacity: 0 },
-        '50%': { y: '5', opacity: 1 },
+        [centerAnim]: { y: '5', opacity: 1 },
         '100%': { y: '0' }
       }
     })
@@ -113,10 +112,10 @@ function animateHeader() {
         btnBox,
         {
           duration: duration,
-          ease: 'power2.inOut',
+          ease,
           keyframes: {
             '0%': { y: '-100', opacity: 0 },
-            '50%': { y: '5', opacity: 1 },
+            [centerAnim]: { y: '5', opacity: 1 },
             '100%': { y: '0' }
           }
         },
@@ -126,10 +125,10 @@ function animateHeader() {
         logo,
         {
           duration: duration,
-          ease: 'power2.inOut',
+          ease,
           keyframes: {
             '0%': { y: '-100', opacity: 0 },
-            '50%': { y: '5', opacity: 1 },
+            [centerAnim]: { y: '5', opacity: 1 },
             '100%': { y: '0' }
           }
         },
@@ -140,20 +139,20 @@ function animateHeader() {
     btnBox.style.opacity = 0;
     tl.from(nav, {
       duration: duration,
-      ease: 'power2.inOut',
+      ease,
       keyframes: {
         '0%': { y: '-100', opacity: 0 },
-        '50%': { y: '5', opacity: 1 },
+        [centerAnim]: { y: '5', opacity: 1 },
         '100%': { y: '0' }
       }
     }).from(
       btnBox,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '-100', opacity: 0 },
-          '50%': { y: '5', opacity: 1 },
+          [centerAnim]: { y: '5', opacity: 1 },
           '100%': { y: '0' }
         }
       },
@@ -351,7 +350,7 @@ function mainHeroSwiper() {
   });
 }
 
-function mainHeroAnim() {
+function mainHeroAnim(duration, ease) {
   const section = document.querySelector('.main-hero'),
     title = document.querySelector('.main-hero__title'),
     link = document.querySelector('.main-hero__link-swiper-box'),
@@ -372,15 +371,14 @@ function mainHeroAnim() {
     swiperBtnBox = document.querySelector('.main-hero__swiper-btn-box'),
     bg = document.querySelector('.main-hero__bg');
 
-  let duration = 3;
   const tl = gsap.timeline();
 
   tl.from(title, {
     duration: duration,
-    ease: 'power2.inOut',
+    ease,
     keyframes: {
       '0%': { scale: '0', opacity: 0 },
-      '50%': { scale: '1.05', opacity: 1 },
+      [centerAnim]: { scale: '1.05', opacity: 1 },
       '100%': { scale: '1' }
     }
   })
@@ -388,10 +386,10 @@ function mainHeroAnim() {
       bg,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '-200', y: '400', opacity: 0 },
-          '50%': { x: '40', y: '40', opacity: 1 },
+          [centerAnim]: { x: '40', y: '40', opacity: 1 },
           '100%': { x: '0', y: '0' }
         }
       },
@@ -401,10 +399,10 @@ function mainHeroAnim() {
       link,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { scale: '0', y: '150', opacity: 0 },
-          '50%': { scale: '1.05', y: '-5', opacity: 1 },
+          [centerAnim]: { scale: '1.05', y: '-5', opacity: 1 },
           '100%': { scale: '1', y: 0 }
         }
       },
@@ -414,10 +412,10 @@ function mainHeroAnim() {
       favorite,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '+=400', opacity: 0 },
-          '50%': { x: '-5', opacity: 1 },
+          [centerAnim]: { x: '-5', opacity: 1 },
           '100%': { x: '0' }
         }
       },
@@ -427,10 +425,10 @@ function mainHeroAnim() {
       titleBox,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '-=400', opacity: 0 },
-          '50%': { x: '+5', opacity: 1 },
+          [centerAnim]: { x: '+5', opacity: 1 },
           '100%': { x: '0' }
         }
       },
@@ -440,10 +438,10 @@ function mainHeroAnim() {
       swiperBtnBox,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '-=400', opacity: 0 },
-          '50%': { x: '+5', opacity: 1 },
+          [centerAnim]: { x: '+5', opacity: 1 },
           '100%': { x: 0 }
         }
       },
@@ -453,10 +451,10 @@ function mainHeroAnim() {
       center,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { scale: '0', y: '+=150', x: '+=80', opacity: 0 },
-          '50%': { scale: '1.015 ', y: 0, x: 0, opacity: 1 },
+          [centerAnim]: { scale: '1.015 ', y: 0, x: 0, opacity: 1 },
           '100%': { scale: '1', y: 0, x: 0 }
         }
       },
@@ -466,10 +464,10 @@ function mainHeroAnim() {
       thumbActive,
       {
         duration: 2.8,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '+=150', x: '+=50', opacity: 0 },
-          '50%': { y: '-15', x: '0', opacity: 1 },
+          [centerAnim]: { y: '-15', x: '0', opacity: 1 },
           '100%': { y: '0', x: '0' }
         }
       },
@@ -479,10 +477,10 @@ function mainHeroAnim() {
       thumbNext,
       {
         duration: 2.9,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '+=150', x: '+=50', opacity: 0 },
-          '50%': { y: '-15', x: '0', opacity: 1 },
+          [centerAnim]: { y: '-15', x: '0', opacity: 1 },
           '100%': { y: '0', x: '0' }
         }
       },
@@ -492,10 +490,10 @@ function mainHeroAnim() {
       thumbNextNext,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '+=150', x: '+=50', opacity: 0 },
-          '50%': { y: '-15', x: '0', opacity: 1 },
+          [centerAnim]: { y: '-15', x: '0', opacity: 1 },
           '100%': { y: '0', x: '0' }
         }
       },
@@ -507,13 +505,12 @@ function mainHeroAnim() {
 // ----------------catalogBannerAnimation-----------------------------
 // ----------------catalogBannerAnimation-----------------------------
 
-function catalogBannerAnimation(duration) {
+function catalogBannerAnimation(duration, ease) {
   const block = document.querySelector('.catalog-block'),
     title = block.querySelector('.catalog-block__title'),
     tagsContainer = block.querySelector('.catalog-block__tags'),
     tags = tagsContainer.querySelectorAll('.catalog-block__tag'),
-    slides = block.querySelectorAll('.catalog-block__slide'),
-    ease = 'power2.in';
+    slides = block.querySelectorAll('.catalog-block__slide');
 
   const timeline = gsap.timeline();
 
@@ -521,10 +518,9 @@ function catalogBannerAnimation(duration) {
     .from(title, {
       duration,
       ease,
-      x: -500,
       keyframes: {
         '0%': { x: -500, opacity: 0 },
-        '40%': { x: 25, opacity: 1 },
+        [centerAnim]: { x: 25, opacity: 1 },
         '100%': { x: 0 }
       }
     })
@@ -533,10 +529,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: 500,
         keyframes: {
           '0%': { y: 500, opacity: 0 },
-          '40%': { y: -25, opacity: 1 },
+          [centerAnim]: { y: -25, opacity: 1 },
           '100%': { y: 0 }
         }
       },
@@ -547,10 +542,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: 500,
         keyframes: {
           '0%': { y: 500, opacity: 0 },
-          '40%': { y: -30, opacity: 1 },
+          [centerAnim]: { y: -30, opacity: 1 },
           '100%': { y: 0 }
         }
       },
@@ -561,10 +555,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: 500,
         keyframes: {
           '0%': { y: 500, opacity: 0 },
-          '40%': { y: -35, opacity: 1 },
+          [centerAnim]: { y: -35, opacity: 1 },
           '100%': { y: 0 }
         }
       },
@@ -575,10 +568,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: 500,
         keyframes: {
           '0%': { y: 500, opacity: 0 },
-          '40%': { y: -40, opacity: 1 },
+          [centerAnim]: { y: -40, opacity: 1 },
           '100%': { y: 0 }
         }
       },
@@ -589,13 +581,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        x: -200,
-        y: -500,
-        opacity: 0,
-        rotateZ: 0,
         keyframes: {
           '0%': { x: -200, y: -500, opacity: 0, rotateZ: 0 },
-          '40%': { x: 10, y: 15, rotateZ: window.screen.width > 768 ? -9 : -10, opacity: 1 },
+          [centerAnim]: { x: 10, y: 15, rotateZ: window.screen.width > 768 ? -9 : -10, opacity: 1 },
           '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? -9 : -10, opacity: 1 }
         }
       },
@@ -606,13 +594,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        x: -200,
-        y: -500,
-        opacity: 0,
-        rotateZ: 0,
         keyframes: {
           '0%': { x: -100, y: -500, opacity: 0, rotateZ: 0 },
-          '40%': { x: 5, y: 15, rotateZ: window.screen.width > 768 ? 6 : 9, opacity: 1 },
+          [centerAnim]: { x: 5, y: 15, rotateZ: window.screen.width > 768 ? 6 : 9, opacity: 1 },
           '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 6 : 9, opacity: 1 }
         }
       },
@@ -623,12 +607,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: -500,
-        opacity: 0,
-        rotateZ: 0,
         keyframes: {
           '0%': { y: -500, opacity: 0, rotateZ: 0 },
-          '40%': { y: 10, rotateZ: window.screen.width > 768 ? 7 : 11, opacity: 1 },
+          [centerAnim]: { y: 10, rotateZ: window.screen.width > 768 ? 7 : 11, opacity: 1 },
           '100%': { y: 0, rotateZ: window.screen.width > 768 ? 7 : 11, opacity: 1 }
         }
       },
@@ -639,13 +620,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: -200,
-        x: -400,
-        opacity: 0,
-        rotateZ: 0,
         keyframes: {
           '0%': { x: -400, y: -200, opacity: 0, rotateZ: 0 },
-          '40%': { x: 15, y: 5, rotateZ: window.screen.width > 768 ? 9 : 13, opacity: 1 },
+          [centerAnim]: { x: 15, y: 5, rotateZ: window.screen.width > 768 ? 9 : 13, opacity: 1 },
           '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 9 : 13, opacity: 1 }
         }
       },
@@ -656,13 +633,9 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: -400,
-        x: -200,
-        opacity: 0,
-        rotateZ: 0,
         keyframes: {
           '0%': { x: -200, y: -400, opacity: 0, rotateZ: 0 },
-          '40%': { x: 10, y: 5, rotateZ: window.screen.width > 768 ? 8 : -8, opacity: 1 },
+          [centerAnim]: { x: 10, y: 5, rotateZ: window.screen.width > 768 ? 8 : -8, opacity: 1 },
           '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 8 : -8, opacity: 1 }
         }
       },
@@ -673,212 +646,193 @@ function catalogBannerAnimation(duration) {
       {
         duration,
         ease,
-        y: -400,
-        x: -100,
-        opacity: 0,
-        rotateZ: 0,
         keyframes: {
           '0%': { x: -100, y: -400, opacity: 0, rotateZ: 0 },
-          '40%': { x: 0, y: 10, rotateZ: window.screen.width > 768 ? -7 : 4, opacity: 1 },
+          [centerAnim]: { x: 0, y: 10, rotateZ: window.screen.width > 768 ? -7 : 4, opacity: 1 },
           '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? -7 : 4, opacity: 1 }
         }
       },
       '<'
     );
 }
-/*const catalogBannerAnimation = () => {
-    const block = document.querySelector('.catalog-block'),
-      title = block.querySelector('.catalog-block__title'),
-      tagsContainer = block.querySelector('.catalog-block__tags'),
-      tags = tagsContainer.querySelectorAll('.catalog-block__tag'),
-      slides = block.querySelectorAll('.catalog-block__slide'),
-      duration = 3,
-      ease = 'power2.in';
-  
-    const timeline = gsap.timeline({
-      scrollTrigger: {
+
+function catalogBannerAnimationMob(duration, ease) {
+  const block = document.querySelector('.catalog-block'),
+    title = block.querySelector('.catalog-block__title'),
+    tagsContainer = block.querySelector('.catalog-block__tags'),
+    tags = tagsContainer.querySelectorAll('.catalog-block__tag'),
+    slides = block.querySelectorAll('.catalog-block__slide');
+
+  title.style.opacity = 0;
+  tags.forEach((item) => (item.style.opacity = 0));
+  slides.forEach((item) => (item.style.opacity = 0));
+
+  const timeline = gsap.timeline();
+  let first = true;
+  function handleFirstScroll() {
+    if (first) {
+      timeline
+        .from(title, {
+          duration,
+          ease,
+          keyframes: {
+            '0%': { x: -500, opacity: 0 },
+            [centerAnim]: { x: 25, opacity: 1 },
+            '100%': { x: 0 }
+          }
+        })
+        .from(
+          slides[0],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 500, opacity: 0 },
+              [centerAnim]: { y: -25, opacity: 1 },
+              '100%': { y: 0 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          slides[1],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 500, opacity: 0 },
+              [centerAnim]: { y: -30, opacity: 1 },
+              '100%': { y: 0 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          slides[2],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 500, opacity: 0 },
+              [centerAnim]: { y: -35, opacity: 1 },
+              '100%': { y: 0 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          slides[3],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 500, opacity: 0 },
+              [centerAnim]: { y: -40, opacity: 1 },
+              '100%': { y: 0 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          tags[0],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { x: -200, y: -500, opacity: 0, rotateZ: 0 },
+              [centerAnim]: { x: 10, y: 15, rotateZ: window.screen.width > 768 ? -9 : -10, opacity: 1 },
+              '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? -9 : -10, opacity: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          tags[1],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { x: -100, y: -500, opacity: 0, rotateZ: 0 },
+              [centerAnim]: { x: 5, y: 15, rotateZ: window.screen.width > 768 ? 6 : 9, opacity: 1 },
+              '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 6 : 9, opacity: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          tags[2],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: -500, opacity: 0, rotateZ: 0 },
+              [centerAnim]: { y: 10, rotateZ: window.screen.width > 768 ? 7 : 11, opacity: 1 },
+              '100%': { y: 0, rotateZ: window.screen.width > 768 ? 7 : 11, opacity: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          tags[3],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { x: -400, y: -200, opacity: 0, rotateZ: 0 },
+              [centerAnim]: { x: 15, y: 5, rotateZ: window.screen.width > 768 ? 9 : 13, opacity: 1 },
+              '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 9 : 13, opacity: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          tags[4],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { x: -200, y: -400, opacity: 0, rotateZ: 0 },
+              [centerAnim]: { x: 10, y: 5, rotateZ: window.screen.width > 768 ? 8 : -8, opacity: 1 },
+              '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 8 : -8, opacity: 1 }
+            }
+          },
+          `-=${duration}`
+        )
+        .from(
+          tags[5],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { x: -100, y: -400, opacity: 0, rotateZ: 0 },
+              [centerAnim]: { x: 0, y: 10, rotateZ: window.screen.width > 768 ? -7 : 4, opacity: 1 },
+              '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? -7 : 4, opacity: 1 }
+            }
+          },
+          `-=${duration}`
+        );
+      first = false;
+    }
+  }
+
+  ScrollTrigger.matchMedia({
+    '(prefers-reduced-motion: no-preference)': function () {
+      ScrollTrigger.create({
         trigger: block,
-        start: 'top center'
-      }
-    });
-  
-    scrollToBlock(block, '#catalog-block', duration);
-  
-    timeline
-      .from(title, {
-        duration,
-        ease,
-        x: -500,
-        keyframes: {
-          '0%': { x: -500, opacity: 0 },
-          '40%': { x: 25, opacity: 1 },
-          '100%': { x: 0 }
-        }
-      })
-      .from(
-        slides[0],
-        {
-          duration,
-          ease,
-          y: 500,
-          keyframes: {
-            '0%': { y: 500, opacity: 0 },
-            '40%': { y: -25, opacity: 1 },
-            '100%': { y: 0 }
-          }
-        },
-        0
-      )
-      .from(
-        slides[1],
-        {
-          duration,
-          ease,
-          y: 500,
-          keyframes: {
-            '0%': { y: 500, opacity: 0 },
-            '40%': { y: -30, opacity: 1 },
-            '100%': { y: 0 }
-          }
-        },
-        '<'
-      )
-      .from(
-        slides[2],
-        {
-          duration,
-          ease,
-          y: 500,
-          keyframes: {
-            '0%': { y: 500, opacity: 0 },
-            '40%': { y: -35, opacity: 1 },
-            '100%': { y: 0 }
-          }
-        },
-        '<'
-      )
-      .from(
-        slides[3],
-        {
-          duration,
-          ease,
-          y: 500,
-          keyframes: {
-            '0%': { y: 500, opacity: 0 },
-            '40%': { y: -40, opacity: 1 },
-            '100%': { y: 0 }
-          }
-        },
-        '<'
-      )
-      .from(
-        tags[0],
-        {
-          duration,
-          ease,
-          x: -200,
-          y: -500,
-          opacity: 0,
-          rotateZ: 0,
-          keyframes: {
-            '0%': { x: -200, y: -500, opacity: 0, rotateZ: 0 },
-            '40%': { x: 10, y: 15, rotateZ: window.screen.width > 768 ? -9 : -10, opacity: 1 },
-            '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? -9 : -10, opacity: 1 }
-          }
-        },
-        0
-      )
-      .from(
-        tags[1],
-        {
-          duration,
-          ease,
-          x: -200,
-          y: -500,
-          opacity: 0,
-          rotateZ: 0,
-          keyframes: {
-            '0%': { x: -100, y: -500, opacity: 0, rotateZ: 0 },
-            '40%': { x: 5, y: 15, rotateZ: window.screen.width > 768 ? 6 : 9, opacity: 1 },
-            '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 6 : 9, opacity: 1 }
-          }
-        },
-        '<'
-      )
-      .from(
-        tags[2],
-        {
-          duration,
-          ease,
-          y: -500,
-          opacity: 0,
-          rotateZ: 0,
-          keyframes: {
-            '0%': { y: -500, opacity: 0, rotateZ: 0 },
-            '40%': { y: 10, rotateZ: window.screen.width > 768 ? 7 : 11, opacity: 1 },
-            '100%': { y: 0, rotateZ: window.screen.width > 768 ? 7 : 11, opacity: 1 }
-          }
-        },
-        '<'
-      )
-      .from(
-        tags[3],
-        {
-          duration,
-          ease,
-          y: -200,
-          x: -400,
-          opacity: 0,
-          rotateZ: 0,
-          keyframes: {
-            '0%': { x: -400, y: -200, opacity: 0, rotateZ: 0 },
-            '40%': { x: 15, y: 5, rotateZ: window.screen.width > 768 ? 9 : 13, opacity: 1 },
-            '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 9 : 13, opacity: 1 }
-          }
-        },
-        '<'
-      )
-      .from(
-        tags[4],
-        {
-          duration,
-          ease,
-          y: -400,
-          x: -200,
-          opacity: 0,
-          rotateZ: 0,
-          keyframes: {
-            '0%': { x: -200, y: -400, opacity: 0, rotateZ: 0 },
-            '40%': { x: 10, y: 5, rotateZ: window.screen.width > 768 ? 8 : -8, opacity: 1 },
-            '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? 8 : -8, opacity: 1 }
-          }
-        },
-        '<'
-      )
-      .from(
-        tags[5],
-        {
-          duration,
-          ease,
-          y: -400,
-          x: -100,
-          opacity: 0,
-          rotateZ: 0,
-          keyframes: {
-            '0%': { x: -100, y: -400, opacity: 0, rotateZ: 0 },
-            '40%': { x: 0, y: 10, rotateZ: window.screen.width > 768 ? -7 : 4, opacity: 1 },
-            '100%': { x: 0, y: 0, rotateZ: window.screen.width > 768 ? -7 : 4, opacity: 1 }
-          }
-        },
-        '<'
-      );
-  };*/
+        start: 'top bottom',
+        scrub: 1,
+        toggleActions: 'play pause resume reverse',
+        onEnter: () => handleFirstScroll()
+      });
+    }
+  });
+}
 
 // ----------------loveAnimation-----------------------------
 // ----------------loveAnimation-----------------------------
 // ----------------loveAnimation-----------------------------
 
-function loveAnimation(duration) {
+function loveAnimation(duration, ease) {
   const block = document.querySelector('.love'),
     titleLeft = block.querySelector('.love__title-left'),
     titleRight = block.querySelector('.love__title-right'),
@@ -895,22 +849,22 @@ function loveAnimation(duration) {
 
   timeline
     .from(titleLeft, {
-      x: -1700,
       duration,
+      ease,
       keyframes: {
-        '0%': { x: -700 },
-        '40%': { x: 25 },
+        '0%': { x: -700, opacity: 0 },
+        [centerAnim]: { x: 25, opacity: 1 },
         '100%': { x: 0 }
       }
     })
     .from(
       titleRight,
       {
-        x: 1000,
         duration,
+        ease,
         keyframes: {
-          '0%': { x: 1000 },
-          '40%': { x: -25 },
+          '0%': { x: 1000, opacity: 0 },
+          [centerAnim]: { x: -25, opacity: 1 },
           '100%': { x: 0 }
         }
       },
@@ -919,13 +873,11 @@ function loveAnimation(duration) {
     .from(
       heart,
       {
-        y: -300,
-        opacity: 0,
-        scale: 2,
         duration,
+        ease,
         keyframes: {
           '0%': { y: -300, opacity: 0, scale: 2.5 },
-          '40%': { y: 25, opacity: 1, scale: 1 },
+          [centerAnim]: { y: 25, opacity: 1, scale: 1 },
           '100%': { y: 0, opacity: 1, scale: 1 }
         }
       },
@@ -934,11 +886,11 @@ function loveAnimation(duration) {
     .from(
       mainSlide,
       {
-        y: 100,
         duration,
+        ease,
         keyframes: {
-          0: { y: 100 },
-          '40%': { y: -15, scale: 1.1 },
+          0: { y: 100, opacity: 0 },
+          [centerAnim]: { y: -15, scale: 1.1, opacity: 1 },
           '100%': { y: 0, scale: 1 }
         }
       },
@@ -947,12 +899,11 @@ function loveAnimation(duration) {
     .from(
       slideBackground,
       {
-        y: 100,
-        scale: 0.5,
         duration,
+        ease,
         keyframes: {
-          '0%': { y: 100, scale: 0.5 },
-          '40%': { y: -15, scale: 1 },
+          '0%': { y: 100, scale: 0.5, opacity: 0 },
+          [centerAnim]: { y: -15, scale: 1, opacity: 1 },
           '100%': { y: 0, scale: 1 }
         }
       },
@@ -961,11 +912,11 @@ function loveAnimation(duration) {
     .from(
       sliderNavigation,
       {
-        x: -500,
         duration,
+        ease,
         keyframes: {
-          '0%': { x: 500 },
-          '40%': { x: -25 },
+          '0%': { x: 500, opacity: 0 },
+          [centerAnim]: { x: -25, opacity: 1 },
           '100%': { x: 0 }
         }
       },
@@ -974,13 +925,11 @@ function loveAnimation(duration) {
     .from(
       tags[0],
       {
-        y: -500,
-        opacity: 0,
-        rotateZ: -31,
         duration,
+        ease,
         keyframes: {
           '0%': { y: -500, opacity: 0, rotateZ: -31 },
-          '40%': { y: 10, opacity: 1, rotateZ: 1 },
+          [centerAnim]: { y: 10, opacity: 1, rotateZ: 1 },
           '100%': { y: 0, opacity: 1, rotateZ: -1 }
         }
       },
@@ -989,13 +938,11 @@ function loveAnimation(duration) {
     .from(
       tags[1],
       {
-        y: -470,
-        opacity: 0,
-        rotateZ: -31,
         duration,
+        ease,
         keyframes: {
           '0%': { y: -470, opacity: 0, rotateZ: -31 },
-          '40%': { y: 10, opacity: 1, rotateZ: 12 },
+          [centerAnim]: { y: 10, opacity: 1, rotateZ: 12 },
           '100%': { y: 0, opacity: 1, rotateZ: 9 }
         }
       },
@@ -1004,13 +951,11 @@ function loveAnimation(duration) {
     .from(
       tags[2],
       {
-        y: -440,
-        opacity: 0,
-        rotateZ: -31,
         duration,
+        ease,
         keyframes: {
           '0%': { y: -440, opacity: 0, rotateZ: -31 },
-          '40%': { y: 10, opacity: 1, rotateZ: -8 },
+          [centerAnim]: { y: 10, opacity: 1, rotateZ: -8 },
           '100%': { y: 0, opacity: 1, rotateZ: -8 }
         }
       },
@@ -1019,13 +964,11 @@ function loveAnimation(duration) {
     .from(
       bottomLeft,
       {
-        y: 100,
-        x: -50,
-        opacity: 0,
         duration,
+        ease,
         keyframes: {
           '0%': { y: 100, x: -50, opacity: 0 },
-          '40%': { y: -10, x: 15, opacity: 1 },
+          [centerAnim]: { y: -10, x: 15, opacity: 1 },
           '100%': { y: 0, x: 0, opacity: 1 }
         }
       },
@@ -1034,12 +977,11 @@ function loveAnimation(duration) {
     .from(
       bottomMiddle,
       {
-        y: 100,
-        opacity: 0,
         duration,
+        ease,
         keyframes: {
           '0%': { y: 100, opacity: 0 },
-          '40%': { y: -10, opacity: 1 },
+          [centerAnim]: { y: -10, opacity: 1 },
           '100%': { y: 0, opacity: 1 }
         }
       },
@@ -1048,13 +990,11 @@ function loveAnimation(duration) {
     .from(
       bottomRight,
       {
-        y: 100,
-        x: 50,
-        opacity: 0,
         duration,
+        ease,
         keyframes: {
           '0%': { y: 100, x: 50, opacity: 0 },
-          '40%': { y: -10, x: -15, opacity: 1 },
+          [centerAnim]: { y: -10, x: -15, opacity: 1 },
           '100%': { y: 0, x: 0, opacity: 1 }
         }
       },
@@ -1062,18 +1002,208 @@ function loveAnimation(duration) {
     );
 }
 
+function loveAnimationMob(duration, ease) {
+  const block = document.querySelector('.love'),
+    titleHead = block.querySelector('.love__head'),
+    heart = block.querySelector('.love__heart'),
+    mainSlide = block.querySelector('.love__swiper-slide:first-child'),
+    slideBackground = block.querySelector('.love__swiper-background'),
+    sliderNavigation = block.querySelector('.love__swiper-navigation'),
+    tags = block.querySelectorAll('.love__tag'),
+    bottomLeft = block.querySelector('.love__bottom-text:first-child'),
+    bottomMiddle = block.querySelector('.love__bottom-swiper'),
+    bottomRight = block.querySelector('.love__bottom-text:last-child');
+
+  titleHead.style.opacity = 0;
+  heart.style.opacity = 0;
+  mainSlide.style.opacity = 0;
+  slideBackground.style.opacity = 0;
+  sliderNavigation.style.opacity = 0;
+  //   tags.forEach(item => item.style.opacity = 0);
+  bottomLeft.style.opacity = 0;
+  bottomMiddle.style.opacity = 0;
+  bottomRight.style.opacity = 0;
+
+  const timeline = gsap.timeline();
+  let first = true;
+
+  function handleFirstScroll() {
+    // gsap.to(window, {
+    //   duration: duration,
+    //   scrollTo: block
+    // });
+    if (first) {
+      timeline
+        .from(titleHead, {
+          duration,
+          ease,
+          keyframes: {
+            '0%': { x: -700, opacity: 0 },
+            [centerAnim]: { x: 25, opacity: 1 },
+            '100%': { x: 0 }
+          }
+        })
+
+        .from(
+          heart,
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: -300, opacity: 0, scale: 2.5 },
+              [centerAnim]: { y: 25, opacity: 1, scale: 1 },
+              '100%': { y: 0, opacity: 1, scale: 1 }
+            }
+          },
+          0
+        )
+        .from(
+          mainSlide,
+          {
+            duration,
+            ease,
+            keyframes: {
+              0: { y: 100, opacity: 0 },
+              [centerAnim]: { y: -15, scale: 1.1, opacity: 1 },
+              '100%': { y: 0, scale: 1 }
+            }
+          },
+          0
+        )
+        .from(
+          slideBackground,
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 100, scale: 0.5, opacity: 0 },
+              [centerAnim]: { y: -15, scale: 1, opacity: 1 },
+              '100%': { y: 0, scale: 1 }
+            }
+          },
+          0
+        )
+        .from(
+          sliderNavigation,
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { x: 500, opacity: 0 },
+              [centerAnim]: { x: -25, opacity: 1 },
+              '100%': { x: 0 }
+            }
+          },
+          0
+        )
+        .from(
+          tags[0],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: -500, opacity: 0, rotateZ: -31 },
+              [centerAnim]: { y: 10, opacity: 1, rotateZ: 1 },
+              '100%': { y: 0, opacity: 1, rotateZ: -1 }
+            }
+          },
+          0
+        )
+        .from(
+          tags[1],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: -470, opacity: 0, rotateZ: -31 },
+              [centerAnim]: { y: 10, opacity: 1, rotateZ: 12 },
+              '100%': { y: 0, opacity: 1, rotateZ: 9 }
+            }
+          },
+          0
+        )
+        .from(
+          tags[2],
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: -440, opacity: 0, rotateZ: -31 },
+              [centerAnim]: { y: 10, opacity: 1, rotateZ: -8 },
+              '100%': { y: 0, opacity: 1, rotateZ: -8 }
+            }
+          },
+          0
+        )
+        .from(
+          bottomLeft,
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 100, x: -50, opacity: 0 },
+              [centerAnim]: { y: -10, x: 15, opacity: 1 },
+              '100%': { y: 0, x: 0, opacity: 1 }
+            }
+          },
+          0
+        )
+        .from(
+          bottomMiddle,
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 100, opacity: 0 },
+              [centerAnim]: { y: -10, opacity: 1 },
+              '100%': { y: 0, opacity: 1 }
+            }
+          },
+          0
+        )
+        .from(
+          bottomRight,
+          {
+            duration,
+            ease,
+            keyframes: {
+              '0%': { y: 100, x: 50, opacity: 0 },
+              [centerAnim]: { y: -10, x: -15, opacity: 1 },
+              '100%': { y: 0, x: 0, opacity: 1 }
+            }
+          },
+          0
+        );
+      first = false;
+    }
+  }
+
+  ScrollTrigger.matchMedia({
+    '(prefers-reduced-motion: no-preference)': function () {
+      ScrollTrigger.create({
+        trigger: block,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1,
+        toggleActions: 'play pause resume reverse',
+        onEnter: () => handleFirstScroll()
+      });
+    }
+  });
+}
+
 // ----------------aboutOurFarm-----------------------------
 // ----------------aboutOurFarm-----------------------------
 // ----------------aboutOurFarm-----------------------------
 
 function aboutOurfarmFavorite() {
-    const favoriteBtns = document.querySelector('.about-our-farm__content-favorite-btn');
-    favoriteBtns.addEventListener('click', () => {
-      favoriteBtns.classList.toggle('active');
-    });
+  const favoriteBtns = document.querySelector('.about-our-farm__content-favorite-btn');
+  favoriteBtns.addEventListener('click', () => {
+    favoriteBtns.classList.toggle('active');
+  });
 }
 
-function aboutOurFarmAnim(duration) {
+function aboutOurFarmAnim(duration, ease) {
   const title = document.querySelector('.about-our-farm__title'),
     leavesLeft = document.querySelector('.about-our-farm__title-img-box--left'),
     leavesRight = document.querySelector('.about-our-farm__title-img-box--right'),
@@ -1089,10 +1219,10 @@ function aboutOurFarmAnim(duration) {
     .timeline()
     .from(title, {
       duration: duration,
-      ease: 'power2.inOut',
+      ease,
       keyframes: {
         '0%': { x: '-100', y: '200', opacity: 0 },
-        '50%': { x: '0', y: '-15', opacity: 1 },
+        [centerAnim]: { x: '0', y: '-15', opacity: 1 },
         '100%': { y: '0', x: '0' }
       }
     })
@@ -1100,10 +1230,10 @@ function aboutOurFarmAnim(duration) {
       img,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '150', y: '100', scale: 0.5, opacity: 0 },
-          '50%': { y: '0', x: '0', scale: 1.05, opacity: 1 },
+          [centerAnim]: { y: '0', x: '0', scale: 1.05, opacity: 1 },
           '100%': { y: '0', x: '0', scale: 1 }
         }
       },
@@ -1113,10 +1243,10 @@ function aboutOurFarmAnim(duration) {
       link,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '80', scale: 0.8, opacity: 0 },
-          '50%': { x: '0', scale: 1.05, opacity: 1 },
+          [centerAnim]: { x: '0', scale: 1.05, opacity: 1 },
           '100%': { x: '0', scale: 1 }
         }
       },
@@ -1126,10 +1256,10 @@ function aboutOurFarmAnim(duration) {
       list,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '-20', y: '60', opacity: 0 },
-          '50%': { x: '15', y: '-6', opacity: 1 },
+          [centerAnim]: { x: '15', y: '-6', opacity: 1 },
           '100%': { y: '0', x: '0' }
         }
       },
@@ -1139,10 +1269,10 @@ function aboutOurFarmAnim(duration) {
       leavesLeft,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '-400', opacity: 0 },
-          '50%': { x: '15', opacity: 1 },
+          [centerAnim]: { x: '15', opacity: 1 },
           '100%': { x: '0' }
         }
       },
@@ -1152,10 +1282,10 @@ function aboutOurFarmAnim(duration) {
       leavesRight,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '400', opacity: 0 },
-          '50%': { x: '15', opacity: 1 },
+          [centerAnim]: { x: '15', opacity: 1 },
           '100%': { x: '0' }
         }
       },
@@ -1165,10 +1295,10 @@ function aboutOurFarmAnim(duration) {
       info,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '-300', scale: 0.8, opacity: 0 },
-          '50%': { x: '15', scale: 1.05, opacity: 1 },
+          [centerAnim]: { x: '15', scale: 1.05, opacity: 1 },
           '100%': { x: '0', scale: 1 }
         }
       },
@@ -1178,10 +1308,10 @@ function aboutOurFarmAnim(duration) {
       num,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '300', y: '100', scale: 0.8, opacity: 0 },
-          '50%': { x: '0', y: '0', scale: 1.05, opacity: 1 },
+          [centerAnim]: { x: '0', y: '0', scale: 1.05, opacity: 1 },
           '100%': { x: '0', y: '0', scale: 1 }
         }
       },
@@ -1191,20 +1321,18 @@ function aboutOurFarmAnim(duration) {
       fav,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '300', scale: 0.8, opacity: 0 },
-          '50%': { x: '15', scale: 1.05, opacity: 1 },
+          [centerAnim]: { x: '15', scale: 1.05, opacity: 1 },
           '100%': { scale: 1, x: '0' }
         }
       },
       `-=${duration}`
     );
-
-
 }
 
-function aboutOurFarmAnimMob(duration) {
+function aboutOurFarmAnimMob(duration, ease) {
   const title = document.querySelector('.about-our-farm__title'),
     leavesLeft = document.querySelector('.about-our-farm__title-img-box--left'),
     leavesRight = document.querySelector('.about-our-farm__title-img-box--right'),
@@ -1216,27 +1344,32 @@ function aboutOurFarmAnimMob(duration) {
     link = document.querySelector('.about-our-farm__link'),
     section = document.querySelector('.about-our-farm');
 
+  title.style.opacity = 0;
+  leavesLeft.style.opacity = 0;
+  leavesRight.style.opacity = 0;
+  list.style.opacity = 0;
+  info.style.opacity = 0;
+  num.style.opacity = 0;
+  fav.style.opacity = 0;
+  img.style.opacity = 0;
+  link.style.opacity = 0;
+
   let first = true;
 
   function handleFirstScroll() {
     if (first) {
-      gsap.to(window, {
-        duration: duration,
-        scrollTo: section
-      });
+      //   gsap.to(window, {
+      //     duration: duration,
+      //     scrollTo: section
+      //   });
       gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top center'
-          }
-        })
+        .timeline()
         .from(title, {
           duration: duration,
-          ease: 'power2.inOut',
+          ease,
           keyframes: {
             '0%': { x: '-100', y: '200', opacity: 0 },
-            '90%': { x: '0', y: '-15', opacity: 1 },
+            [centerAnim]: { x: '0', y: '-15', opacity: 1 },
             '100%': { y: '0', x: '0' }
           }
         })
@@ -1244,10 +1377,10 @@ function aboutOurFarmAnimMob(duration) {
           img,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '150', y: '100', scale: 0.5, opacity: 0 },
-              '90%': { y: '0', x: '0', scale: 1.05, opacity: 1 },
+              [centerAnim]: { y: '0', x: '0', scale: 1.05, opacity: 1 },
               '100%': { y: '0', x: '0', scale: 1 }
             }
           },
@@ -1257,10 +1390,10 @@ function aboutOurFarmAnimMob(duration) {
           link,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '80', scale: 0.8, opacity: 0 },
-              '90%': { x: '0', scale: 1.05, opacity: 1 },
+              [centerAnim]: { x: '0', scale: 1.05, opacity: 1 },
               '100%': { x: '0', scale: 1 }
             }
           },
@@ -1270,10 +1403,10 @@ function aboutOurFarmAnimMob(duration) {
           list,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '-20', y: '60', opacity: 0 },
-              '90%': { x: '15', y: '-6', opacity: 1 },
+              [centerAnim]: { x: '15', y: '-6', opacity: 1 },
               '100%': { y: '0', x: '0' }
             }
           },
@@ -1283,10 +1416,10 @@ function aboutOurFarmAnimMob(duration) {
           leavesLeft,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '-400', opacity: 0 },
-              '90%': { x: '15', opacity: 1 },
+              [centerAnim]: { x: '15', opacity: 1 },
               '100%': { x: '0' }
             }
           },
@@ -1296,10 +1429,10 @@ function aboutOurFarmAnimMob(duration) {
           leavesRight,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '400', opacity: 0 },
-              '90%': { x: '15', opacity: 1 },
+              [centerAnim]: { x: '15', opacity: 1 },
               '100%': { x: '0' }
             }
           },
@@ -1309,10 +1442,10 @@ function aboutOurFarmAnimMob(duration) {
           info,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '-300', scale: 0.8, opacity: 0 },
-              '90%': { x: '15', scale: 1.05, opacity: 1 },
+              [centerAnim]: { x: '15', scale: 1.05, opacity: 1 },
               '100%': { x: '0', scale: 1 }
             }
           },
@@ -1322,10 +1455,10 @@ function aboutOurFarmAnimMob(duration) {
           num,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '300', y: '100', scale: 0.8, opacity: 0 },
-              '90%': { x: '0', y: '0', scale: 1.05, opacity: 1 },
+              [centerAnim]: { x: '0', y: '0', scale: 1.05, opacity: 1 },
               '100%': { x: '0', y: '0', scale: 1 }
             }
           },
@@ -1335,10 +1468,10 @@ function aboutOurFarmAnimMob(duration) {
           fav,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '300', scale: 0.8, opacity: 0 },
-              '90%': { x: '15', scale: 1.05, opacity: 1 },
+              [centerAnim]: { x: '15', scale: 1.05, opacity: 1 },
               '100%': { scale: 1, x: '0' }
             }
           },
@@ -1352,7 +1485,9 @@ function aboutOurFarmAnimMob(duration) {
     '(prefers-reduced-motion: no-preference)': function () {
       ScrollTrigger.create({
         trigger: section,
-        start: 'top 90%',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1,
         toggleActions: 'play pause resume reverse',
         onEnter: () => handleFirstScroll()
       });
@@ -1364,47 +1499,40 @@ function aboutOurFarmAnimMob(duration) {
 // ----------------latestNews-----------------------------
 // ----------------latestNews-----------------------------
 
-
 function latestNewsSwiper() {
-    const swiper = new Swiper('.latest-news__swiper', {
-        allowTouchMove: true,
-        speed: 1000,
-        loop: true,
+  const swiper = new Swiper('.latest-news__swiper', {
+    allowTouchMove: true,
+    speed: 1000,
+    loop: true,
+    spaceBetween: rem(2),
+    slidesPerView: 1,
+    breakpoints: {
+      768: {
         spaceBetween: rem(2),
-        slidesPerView: 1,
-        breakpoints: {
-          768: {
-            spaceBetween: rem(2),
-            slidesPerView: 4,
-            allowTouchMove: false
-          }
-        },
-        navigation: {
-          nextEl: '.latest-news__swiper-btn--next',
-          prevEl: '.latest-news__swiper-btn--prev'
-        }
-      });
+        slidesPerView: 4,
+        allowTouchMove: false
+      }
+    },
+    navigation: {
+      nextEl: '.latest-news__swiper-btn--next',
+      prevEl: '.latest-news__swiper-btn--prev'
+    }
+  });
 }
 
-function latestNewsAnim(duration) {
+function latestNewsAnim(duration, ease) {
   const title = document.querySelector('.latest-news__title'),
     link = document.querySelector('.latest-news__link'),
-    slides = document.querySelectorAll('.latest-news__swiper-slide-inner'),
-    section = document.querySelector('#latest-news');
+    slides = document.querySelectorAll('.latest-news__swiper-slide-inner');
 
   gsap
-    .timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top center'
-      }
-    })
+    .timeline()
     .from(title, {
       duration: duration,
-      ease: 'power2.inOut',
+      ease,
       keyframes: {
         '0%': { x: '-400', opacity: 0 },
-        '50%': { x: '25', opacity: 1 },
+        [centerAnim]: { x: '25', opacity: 1 },
         '100%': { x: '0' }
       }
     })
@@ -1412,10 +1540,10 @@ function latestNewsAnim(duration) {
       link,
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { x: '400', opacity: 0 },
-          '50%': { x: '-25', opacity: 1 },
+          [centerAnim]: { x: '-25', opacity: 1 },
           '100%': { x: '0' }
         }
       },
@@ -1425,10 +1553,10 @@ function latestNewsAnim(duration) {
       slides[0],
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '400', opacity: 0 },
-          '50%': { y: '-25', opacity: 1 },
+          [centerAnim]: { y: '-25', opacity: 1 },
           '100%': { y: '0' }
         }
       },
@@ -1438,10 +1566,10 @@ function latestNewsAnim(duration) {
       slides[1],
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '400', opacity: 0 },
-          '50%': { y: '-25', opacity: 1 },
+          [centerAnim]: { y: '-25', opacity: 1 },
           '100%': { y: '0' }
         }
       },
@@ -1451,10 +1579,10 @@ function latestNewsAnim(duration) {
       slides[2],
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '500', opacity: 0 },
-          '50%': { y: '-25', opacity: 1 },
+          [centerAnim]: { y: '-25', opacity: 1 },
           '100%': { y: '0' }
         }
       },
@@ -1464,10 +1592,10 @@ function latestNewsAnim(duration) {
       slides[3],
       {
         duration: duration,
-        ease: 'power2.inOut',
+        ease,
         keyframes: {
           '0%': { y: '500', opacity: 0 },
-          '50%': { y: '-25', opacity: 1 },
+          [centerAnim]: { y: '-25', opacity: 1 },
           '100%': { y: '0' }
         }
       },
@@ -1475,7 +1603,7 @@ function latestNewsAnim(duration) {
     );
 }
 
-function latestNewsAnimMob(duration) {
+function latestNewsAnimMob(duration, ease) {
   const title = document.querySelector('.latest-news__title'),
     link = document.querySelector('.latest-news__link'),
     slides = document.querySelectorAll('.latest-news__swiper-slide-inner'),
@@ -1489,10 +1617,10 @@ function latestNewsAnimMob(duration) {
 
   function handleFirstScroll() {
     if (first) {
-      gsap.to(window, {
-        duration: duration,
-        scrollTo: { y: section } // Прокрутка к элементу с учетом отступа
-      });
+      //   gsap.to(window, {
+      //     duration: duration,
+      //     scrollTo: { y: section } // Прокрутка к элементу с учетом отступа
+      //   });
       gsap
         .timeline({
           scrollTrigger: {
@@ -1502,10 +1630,10 @@ function latestNewsAnimMob(duration) {
         })
         .from(title, {
           duration: duration,
-          ease: 'power2.inOut',
+          ease,
           keyframes: {
             '0%': { x: '-400', opacity: 0 },
-            '90%': { x: '25', opacity: 1 },
+            [centerAnim]: { x: '25', opacity: 1 },
             '100%': { x: '0' }
           }
         })
@@ -1513,10 +1641,10 @@ function latestNewsAnimMob(duration) {
           link,
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { x: '400', opacity: 0 },
-              '90%': { x: '-25', opacity: 1 },
+              [centerAnim]: { x: '-25', opacity: 1 },
               '100%': { x: '0' }
             }
           },
@@ -1526,10 +1654,10 @@ function latestNewsAnimMob(duration) {
           slides[0],
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { y: '400', opacity: 0 },
-              '90%': { y: '-25', opacity: 1 },
+              [centerAnim]: { y: '-25', opacity: 1 },
               '100%': { y: '0' }
             }
           },
@@ -1539,10 +1667,10 @@ function latestNewsAnimMob(duration) {
           slides[1],
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { y: '400', opacity: 0 },
-              '90%': { y: '-25', opacity: 1 },
+              [centerAnim]: { y: '-25', opacity: 1 },
               '100%': { y: '0' }
             }
           },
@@ -1552,10 +1680,10 @@ function latestNewsAnimMob(duration) {
           slides[2],
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { y: '500', opacity: 0 },
-              '90%': { y: '-25', opacity: 1 },
+              [centerAnim]: { y: '-25', opacity: 1 },
               '100%': { y: '0' }
             }
           },
@@ -1565,10 +1693,10 @@ function latestNewsAnimMob(duration) {
           slides[3],
           {
             duration: duration,
-            ease: 'power2.inOut',
+            ease,
             keyframes: {
               '0%': { y: '500', opacity: 0 },
-              '90%': { y: '-25', opacity: 1 },
+              [centerAnim]: { y: '-25', opacity: 1 },
               '100%': { y: '0' }
             }
           },
@@ -1595,13 +1723,13 @@ function latestNewsAnimMob(duration) {
 // ----------------footer-----------------------------
 // ----------------footer-----------------------------
 
-function animateFooter(duration) {
+function animateFooter(duration, ease) {
   const footer = document.querySelector('.footer--anim'),
     footerSvgBox = footer.querySelector('.footer__svg-box');
   gsap.timeline().from(footerSvgBox, { width: 0, duration: 1.5, ease: 'linear' });
 }
 
-function animateFooterMob(duration) {
+function animateFooterMob(duration, ease) {
   const footer = document.querySelector('.footer--anim'),
     footerSvgBox = footer.querySelector('.footer__svg-box');
 
@@ -1610,7 +1738,7 @@ function animateFooterMob(duration) {
     function handleFirstScroll() {
       if (first) {
         footer.style.opacity = '1';
-        gsap.to(window, { duration: duration, scrollTo: footer });
+        // gsap.to(window, { duration: duration, scrollTo: footer });
         gsap.timeline().from(footerSvgBox, { width: 0, duration: 1.5, ease: 'linear' });
       }
       first = false;
