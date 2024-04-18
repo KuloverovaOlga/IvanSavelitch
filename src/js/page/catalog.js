@@ -40,7 +40,6 @@ let slider = $( "#range-price" ).slider({
 $('#price-from').val(slider.slider('values', 0));
 $('#price-to').val(slider.slider('values', 1));
 
-
 $('#price-from').on('input', function () {
   if (Number($(this).val()) < Number($('#price-to').val())) {
     slider.slider('values', 0, $(this).val());
