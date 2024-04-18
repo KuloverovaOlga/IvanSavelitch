@@ -1,5 +1,9 @@
 .love {
-  padding: 18rem 0;
+  margin: 20rem 0;
+  height: 100% !important;
+  // padding-top: 10rem;
+  display: flex !important;
+  align-items: center !important;
 
   &__container {
     width: 100%;
@@ -12,7 +16,7 @@
     justify-content: space-between;
     align-items: center;
     max-width: 174.4rem;
-    margin: 0 auto 9.9rem;
+    margin: 0 auto 8rem;
     z-index: 3;
   }
 
@@ -32,7 +36,7 @@
 
   &__body {
     position: relative;
-    margin-bottom: 13.8rem;
+    margin-bottom: 10rem;
   }
 
   &__tags-swiper {
@@ -205,8 +209,8 @@
   }
 
   @media (max-width: 48em) {
-    padding: 10rem 0 26rem;
-
+    margin: 10rem 0 26rem;
+    
     &__head {
       margin-bottom: 6rem;
       flex-direction: column;

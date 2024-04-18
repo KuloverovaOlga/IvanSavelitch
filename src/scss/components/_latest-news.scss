@@ -1,5 +1,12 @@
 .latest-news {
-
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  padding-top: 32.5rem !important;
+  @include small-tablet {
+    height: fit-content !important;
+    padding-top: 0 !important;
+     }
   &__container {
     max-width: 192rem;
     width: 100%;
@@ -12,19 +19,34 @@
   // .latest-news__inner
 
   &__inner {
-    background: url(./assets/images/latest-news-bg.svg) no-repeat top/cover;
+    // background: url(./assets/images/latest-news-bg.svg) no-repeat top/cover;
     width: 100%;
     min-height: 120rem;
     position: relative;
-    padding: 32.5rem 8.8rem 0;
+    padding:  0 8.8rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    position: relative;
+    &::before {
+      position: absolute;
+      top: -32.5rem;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: url(./assets/images/latest-news-bg.svg) no-repeat top/cover;
+      z-index: -1;
+    }
+    // gap: 0rem;
     @include small-tablet {
-      padding: 35.8rem 4rem 0;
+      padding: 0 4rem ;
       min-height: 200rem;
-      background: url(./assets/images/latest-news-bg-mob.svg) no-repeat top/cover;
-      gap: 6.4rem;
+      // gap: 6.4rem;
+      &::before {
+        top: -42.5rem;
+      }
     }
   }
 
@@ -117,8 +139,9 @@
 
   &__swiper-wrapper {
     padding-bottom: 8rem;
-    padding-top: 3rem ;
+    padding-top: 6rem ;
     @include small-tablet {
+      padding-top: 6.4rem ;
     }
   }
 
