@@ -52,12 +52,16 @@ section {
   }
 }
 
-.anim-opacity {
-  opacity: 0;
-  // @media (max-width: 48em) {
-  // opacity: 1;
-  // }
+.fp-watermark {
+  display: none!important;
 }
+
+// .fp-overflow {
+//   overflow: unset!important;
+//   @media (max-width: 48em) {
+//     overflow: auto!important;
+//   }
+// }
 
 .bc {
   width: 174.4rem;
