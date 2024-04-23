@@ -101,6 +101,32 @@
   &::after {
     right: 2.2rem;
   }
+
+  @media (max-width: 48em) {
+    width: 38.6rem;
+    height: 22.8rem;
+
+    &__content {
+      max-width: 12.2rem;
+      font-size: 5.2rem;
+      line-height: 6rem;
+      text-align: center;
+    }
+
+    &::before,
+    &::after {
+      width: 5.2rem;
+      height: 5.2rem;
+    }
+
+    &::before {
+      left: 4rem;
+    }
+
+    &::after {
+      right: 4rem;
+    }
+  }
 }
 
 .circle-icon {
