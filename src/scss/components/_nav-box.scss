@@ -21,6 +21,10 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 2rem;
+    @include small-tablet {
+      justify-content: center;
+      gap: 1.6rem;
+    }
   }
 
   // .nav-box__link
@@ -39,9 +43,11 @@
 
     @include small-tablet {
       gap: 1.6rem;
+      font-size: 3.2rem;
+      letter-spacing: 0.02em;
       &:not(:last-child)::after {
-        width: 0.8rem;
-        height: 0.8rem;
+        width: 4rem;
+        height: 4rem;
       }
     }
   }

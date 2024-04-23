@@ -21,10 +21,21 @@
     position: relative;
     display: flex;
     justify-content: space-between;
+    @include small-tablet {
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      padding: 30rem 0 40rem;
+      gap: 8rem;
+      background: url(./assets/images/category-hero-bg-mob.svg) no-repeat top/cover;
+    }
   }
 
   &__nav-box {
     flex-basis: 25%;
+    @include small-tablet {
+      flex-basis: 100%;
+    }
   }
 
   // .category-hero__title-box
@@ -44,6 +55,9 @@
   // .category-hero__title
 
   &__title {
+    @include small-tablet {
+      font-size: 16rem;
+    }
   }
 
   // .category-hero__title-img-wrapper
@@ -60,6 +74,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @include small-tablet {
+      width: 14rem;
+      height: 14rem;
+      right: 4.8rem;
+      bottom: -10.4rem;
+    }
   }
 
   // .category-hero__title-img-box
@@ -80,10 +100,21 @@
     flex-basis: 25%;
     display: flex;
     justify-content: flex-end;
+    @include small-tablet {
+      flex-basis: 100%;
+      justify-content: center;
+    }
   }
   &__text {
     width: 22rem;
     text-align: right;
     line-height: 130%;
+    @include small-tablet {
+      width: 51.6rem;
+      text-align: center;
+      font-size: 3.2rem;
+      letter-spacing: 0.02em;
+      margin-top: 6rem;
+    }
   }
 }

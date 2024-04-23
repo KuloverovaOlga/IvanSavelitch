@@ -1,5 +1,6 @@
 
 import '../page/main'
+import '../page/production'
 
 // gsap.utils.toArray('.item').forEach(function (elem) {
 //   ScrollTrigger.create({
