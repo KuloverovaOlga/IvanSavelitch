@@ -41,19 +41,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function catalogHeroSwiper() {
   const swiper = new Swiper('.catalog-hero__swiper', {
-    centeredSlides: true,
-    slidesPerView: 'auto',
+    centeredSlides: false,
+    slidesPerView: 1,
     allowTouchMove: false,
     speed: 1000,
     loop: true,
     breakpoints: {
-      768: {}
+      768: {
+        slidesPerView: 'auto',
+        centeredSlides: true
+      }
     },
     navigation: {}
   });
 
   const prevButton = document.querySelector('.catalog-hero__swiper-btn--prev');
   const nextButton = document.querySelector('.catalog-hero__swiper-btn--next');
+
+  document.querySelectorAll('.catalog-hero__num').forEach((item, i) => {
+    item.textContent = window.innerWidth > 768 ? `0${i}` : `0${i+1}`;
+  });
 
   let activeSlideIndex;
   let slides;

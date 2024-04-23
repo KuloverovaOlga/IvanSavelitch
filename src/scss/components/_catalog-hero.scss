@@ -15,7 +15,14 @@
     position: absolute;
     background: url(./assets/images/category-hero-bg.svg) no-repeat top/cover;
     inset: 0;
-    height: 101.1rem;
+    // height: 101.1rem;
+    height: 100%;
+    width: 100%;
+    @include small-tablet {
+      background: url(./assets/images/catalog-hero-bg-mob.svg) no-repeat top/cover;
+      // height: 210rem;
+      height: 100%;
+    }
   }
 
   // .catalog-hero__inner
@@ -27,11 +34,21 @@
     width: 100%;
     height: 101.1rem;
     position: relative;
+    @include small-tablet {
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      padding: 30rem 0;
+      gap: 6rem;
+    }
   }
 
   // .catalog-hero__swiper
 
   &__swiper {
+    @include small-tablet {
+      width: 100%;
+    }
   }
 
   // .catalog-hero__swiper-wrapper
@@ -55,6 +72,10 @@
         // opacity: 1;
       }
     }
+
+    @include small-tablet {
+      width: 100% !important;
+    }
   }
 
   // .catalog-hero__swiper-slide-inner
@@ -71,27 +92,37 @@
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
+    @include small-tablet {
+      gap: 1.2rem;
+    }
   }
 
   // .catalog-hero__num
 
   &__num {
+    @include small-tablet {
+      font-size: 4.8rem;
+    }
   }
 
   // .catalog-hero__title
 
   &__title {
     margin-top: -2.1rem;
+    @include small-tablet {
+      font-size: 16rem;
+    }
   }
 
   // .catalog-hero__img-box
 
   &__img-box {
     margin-top: -4.8rem;
-
     scale: 0;
     // opacity: 0;
     // transition: scale 1.5s, opacity 1s 0.3s;
+    width: 43.425rem;
+    height: 44.7rem;
     & img {
       width: 100%;
       height: 100%;
@@ -109,6 +140,19 @@
       width: 47.072rem;
       height: 43.579rem;
     }
+
+    @include small-tablet {
+    }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4rem 0;
+    &--bottom {
+      margin-top: 6rem;
+    }
   }
 
   // .catalog-hero__swiper-btn-box
@@ -121,6 +165,9 @@
     z-index: 15;
     bottom: 49.9rem;
     right: 16.8rem;
+    @include small-tablet {
+      position: static;
+    }
   }
 
   // .catalog-hero__swiper-btn
@@ -174,11 +221,21 @@
     bottom: 16.9rem;
     right: 9.9rem;
     z-index: 10;
+    @include small-tablet {
+      position: static;
+      width: 38.6rem;
+      padding: 4rem 10.8rem 4.4rem 12rem;
+    }
   }
 
   // .catalog-hero__text
 
   &__text {
+    @include small-tablet {
+      font-size: 5.2rem;
+      line-height: 120%;
+      letter-spacing: 0.01em;
+    }
   }
 
   // .catalog-hero__text-box--left
@@ -201,6 +258,15 @@
       position: relative;
       transform: translateY(-50%);
     }
+    @include small-tablet {
+      position: static;
+      width: 39.2rem;
+      height: 27.2rem;
+      -webkit-mask-image: url(./assets/images/catalog-hero-mask-left-mob.svg);
+      mask-image: url(./assets/images/catalog-hero-mask-left-mob.svg);
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
   }
 
   // .catalog-hero__link-box
@@ -222,6 +288,14 @@
     backdrop-filter: blur(100px);
     z-index: 15;
     color: $orange;
+    @include small-tablet {
+      position: static;
+      width: 38.6rem;
+      flex-shrink: 0;
+      margin-left: -10rem;
+      margin-top: 16rem;
+      padding: 5.2rem 4rem;
+    }
   }
 
   // .catalog-hero__link-img-box
@@ -234,11 +308,20 @@
       height: 100%;
       object-fit: cover;
     }
+    @include small-tablet {
+      width: 5.2rem;
+      height: 5.2rem;
+    }
   }
 
   // .catalog-hero__link-text
 
   &__link-text {
     width: 10.7rem;
+    @include small-tablet {
+      font-size: 4.8rem;
+      width: 15.6rem;
+      text-align: center;
+    }
   }
 }

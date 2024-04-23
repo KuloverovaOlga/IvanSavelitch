@@ -1,7 +1,8 @@
 .header {
   position: relative;
   z-index: 20;
-  &--main {
+  &--main, 
+  &--anim {
     position: absolute;
     top: 0;
     right: 0;
