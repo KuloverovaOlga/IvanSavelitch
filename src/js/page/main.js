@@ -84,10 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let duration = 3;
-let centerAnim = window.innerWidth > 768 ? '90%'  : '40%';
+let centerAnim = window.innerWidth > 768 ? '90%' : '40%';
 let ease = 'power2.inOut';
 
-function animateHeader(duration, ease) {
+export function animateHeader(duration, ease) {
   let header = document.querySelector('.header');
   const nav = header.querySelector('.header__nav');
   const btnBox = header.querySelector('.header__btn-box');
@@ -104,7 +104,7 @@ function animateHeader(duration, ease) {
       ease,
       keyframes: {
         '0%': { y: '-100', opacity: 0 },
-        [centerAnim]: { y: '5', opacity: 1 },
+        [centerAnim]: { opacity: 1 },
         '100%': { y: '0' }
       }
     })
@@ -115,7 +115,7 @@ function animateHeader(duration, ease) {
           ease,
           keyframes: {
             '0%': { y: '-100', opacity: 0 },
-            [centerAnim]: { y: '5', opacity: 1 },
+            [centerAnim]: { opacity: 1 },
             '100%': { y: '0' }
           }
         },
@@ -128,7 +128,7 @@ function animateHeader(duration, ease) {
           ease,
           keyframes: {
             '0%': { y: '-100', opacity: 0 },
-            [centerAnim]: { y: '5', opacity: 1 },
+            [centerAnim]: {  opacity: 1 },
             '100%': { y: '0' }
           }
         },
@@ -142,7 +142,7 @@ function animateHeader(duration, ease) {
       ease,
       keyframes: {
         '0%': { y: '-100', opacity: 0 },
-        [centerAnim]: { y: '5', opacity: 1 },
+        [centerAnim]: { opacity: 1 },
         '100%': { y: '0' }
       }
     }).from(
@@ -152,7 +152,7 @@ function animateHeader(duration, ease) {
         ease,
         keyframes: {
           '0%': { y: '-100', opacity: 0 },
-          [centerAnim]: { y: '5', opacity: 1 },
+          [centerAnim]: {  opacity: 1 },
           '100%': { y: '0' }
         }
       },
@@ -1723,13 +1723,13 @@ function latestNewsAnimMob(duration, ease) {
 // ----------------footer-----------------------------
 // ----------------footer-----------------------------
 
-function animateFooter(duration, ease) {
+export function animateFooter(duration, ease) {
   const footer = document.querySelector('.footer--anim'),
     footerSvgBox = footer.querySelector('.footer__svg-box');
   gsap.timeline().from(footerSvgBox, { width: 0, duration: 1.5, ease: 'linear' });
 }
 
-function animateFooterMob(duration, ease) {
+export function animateFooterMob(duration, ease) {
   const footer = document.querySelector('.footer--anim'),
     footerSvgBox = footer.querySelector('.footer__svg-box');
 
@@ -1739,7 +1739,7 @@ function animateFooterMob(duration, ease) {
       if (first) {
         footer.style.opacity = '1';
         // gsap.to(window, { duration: duration, scrollTo: footer });
-        gsap.timeline().from(footerSvgBox, { width: 0, duration: 1.5, ease: 'linear' });
+        gsap.timeline().from(footerSvgBox, { width: 0, duration: 1, ease: 'linear' });
       }
       first = false;
     }
