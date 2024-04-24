@@ -117,6 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+
 let duration = 2;
 let ease = 'power2.in';
 
@@ -834,11 +836,3 @@ function productionGalleryAnimMob() {
     }
   });
 }
-
-//   keyframes: {
-//     '0%': { rotationY: '0deg', y: '0' },
-//     '10%': { rotateZ: '10deg' },
-//     '40%': { rotationY: '90deg' },
-//     '70%': { rotationY: '180deg', y: '-250' },
-//     '100%': { y: '-500' }
-//   }

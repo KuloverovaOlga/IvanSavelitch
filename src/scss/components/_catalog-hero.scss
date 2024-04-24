@@ -35,10 +35,11 @@
     height: 101.1rem;
     position: relative;
     @include small-tablet {
+      margin-top: -30.5rem;
       height: fit-content;
       display: flex;
       flex-direction: column;
-      padding: 30rem 0;
+      padding: 40rem 0;
       gap: 6rem;
     }
   }

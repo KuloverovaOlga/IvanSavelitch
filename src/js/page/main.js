@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mainHeroAnim(duration, ease);
     aboutOurfarmFavorite();
     latestNewsSwiper();
+
     if (window.innerWidth > 767) {
       let executedFunctions = {};
 
@@ -41,6 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           if (!executedFunctions[destination.anchor] && destination.anchor == 'love' && direction == 'down') {
             loveAnimation(duration, ease);
+            executedFunctions[destination.anchor] = true;
+          }
+
+          if (
+            !executedFunctions[destination.anchor] &&
+            destination.anchor == 'development' &&
+            direction == 'down'
+          ) {
+            developmentText();
+            developmentAnimation();
             executedFunctions[destination.anchor] = true;
           }
 
@@ -78,6 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
         aboutOurFarmAnimMob(duration, ease);
         latestNewsAnimMob(duration, ease);
         animateFooterMob(duration, ease);
+        developmentText();
+        developmentAnimation();
       }, 500);
     }
   }
@@ -128,7 +141,7 @@ export function animateHeader(duration, ease) {
           ease,
           keyframes: {
             '0%': { y: '-100', opacity: 0 },
-            [centerAnim]: {  opacity: 1 },
+            [centerAnim]: { opacity: 1 },
             '100%': { y: '0' }
           }
         },
@@ -152,7 +165,7 @@ export function animateHeader(duration, ease) {
         ease,
         keyframes: {
           '0%': { y: '-100', opacity: 0 },
-          [centerAnim]: {  opacity: 1 },
+          [centerAnim]: { opacity: 1 },
           '100%': { y: '0' }
         }
       },
@@ -1756,3 +1769,692 @@ export function animateFooterMob(duration, ease) {
     });
   }
 }
+
+const developmentText = () => {
+  const title = document.querySelector('.development__title'),
+    bottomWords = document.querySelectorAll('.development__bottom-word');
+
+  const getLetters = (wordContainer) => {
+    return wordContainer.textContent
+      .split('')
+      .map((letter) => `<span>${letter}</span>`)
+      .join('');
+  };
+
+  title.innerHTML = getLetters(title);
+
+  bottomWords.forEach((word) => {
+    word.innerHTML = getLetters(word);
+  });
+};
+
+const developmentAnimation = () => {
+  const block = document.querySelector('.development'),
+    title = block.querySelector('.development__title'),
+    titleLetters = title.querySelectorAll('span'),
+    bottom = block.querySelector('.development__bottom'),
+    bottomChildrens = bottom.children,
+    image = block.querySelector('.development__image'),
+    left = block.querySelector('.development__left'),
+    right = block.querySelector('.development__right'),
+    duration = 3;
+
+  const bottomWords = [...bottomChildrens]
+    .filter((elem) => elem.classList.contains('development__bottom-word'))
+    .map((word) => [...word.children]);
+
+  const timeline =
+    window.screen.width < 768
+      ? gsap.timeline({
+          scrollTrigger: {
+            trigger: block,
+            start: 'top center'
+          }
+        })
+      : gsap.timeline();
+  console.log(bottomWords[0][0]);
+
+  timeline
+    .from([...titleLetters].slice(0, 10), {
+      x: '-=400',
+      duration: duration - 2
+    })
+    .from(
+      [...titleLetters].slice(10),
+      {
+        x: '+=400',
+        duration: duration - 2
+      },
+      0
+    )
+    .from(
+      [...bottomChildrens].slice(0, 7),
+      {
+        x: '-=400',
+        duration: duration - 2
+      },
+      0
+    )
+    .from(
+      [...bottomChildrens][8],
+      {
+        x: '+=400',
+        duration: duration - 2
+      },
+      0
+    )
+    .from(
+      [...bottomChildrens][7],
+      {
+        y: '+=100',
+        duration: duration - 2
+      },
+      0
+    )
+    .to(image, {
+      scale: window.screen.width > 768 ? 3 : 1.4,
+      y: window.screen.width > 768 ? '+=20rem' : '+=6rem',
+      duration: duration - 1
+    })
+    .to(
+      titleLetters[0],
+      {
+        x: window.screen.width > 768 ? '21rem' : '-1rem',
+        y: window.screen.width > 768 ? '47rem' : '43.5rem',
+        rotateZ: -86,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[1],
+      {
+        x: window.screen.width > 768 ? '15rem' : '-4.5rem',
+        y: window.screen.width > 768 ? '40rem' : '39rem',
+        rotateZ: -78,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[2],
+      {
+        x: window.screen.width > 768 ? '10.5rem' : '-7rem',
+        y: window.screen.width > 768 ? '33.5rem' : '34.5rem',
+        rotateZ: -70,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[3],
+      {
+        x: window.screen.width > 768 ? '7rem' : '-9rem',
+        y: window.screen.width > 768 ? '27.5rem' : '31rem',
+
+        rotateZ: -63,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[4],
+      {
+        x: window.screen.width > 768 ? '3.5rem' : '-10.5rem',
+        y: window.screen.width > 768 ? '21.5rem' : '27rem',
+        rotateZ: -55,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[5],
+      {
+        x: window.screen.width > 768 ? '1rem' : '-11.75rem',
+        y: window.screen.width > 768 ? '16rem' : '23.5rem',
+        rotateZ: -47,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[6],
+      {
+        x: window.screen.width > 768 ? '-0.5rem' : '-12.5rem',
+        y: window.screen.width > 768 ? '11.5rem' : '20.5rem',
+        rotateZ: -39,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[7],
+      {
+        x: window.screen.width > 768 ? '-1.5rem' : '-12.75rem',
+        y: window.screen.width > 768 ? '8rem' : '18rem',
+        rotateZ: -32,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[8],
+      {
+        x: window.screen.width > 768 ? '-2.5rem' : '-12.5rem',
+        y: window.screen.width > 768 ? '4.5rem' : '16rem',
+        rotateZ: -24,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[9],
+      {
+        x: window.screen.width > 768 ? '-2rem' : '-12rem',
+        y: window.screen.width > 768 ? '2rem' : '14.5rem',
+        rotateZ: -16,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[11],
+      {
+        x: window.screen.width > 768 ? '0rem' : '-11rem',
+        y: window.screen.width > 768 ? '0rem' : '13.5rem',
+        rotateZ: -2,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[12],
+      {
+        x: window.screen.width > 768 ? '0.5rem' : '-10rem',
+        y: window.screen.width > 768 ? '1rem' : '14rem',
+        rotateZ: 8,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[13],
+      {
+        x: window.screen.width > 768 ? '0.5rem' : '-10rem',
+        y: window.screen.width > 768 ? '3rem' : '15.25rem',
+        rotateZ: 17,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[14],
+      {
+        x: window.screen.width > 768 ? '0rem' : '-9.75rem',
+        y: window.screen.width > 768 ? '5rem' : '16.75rem',
+        rotateZ: 25,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[15],
+      {
+        x: window.screen.width > 768 ? '-0.5rem' : '-10rem',
+        y: window.screen.width > 768 ? '8.5rem' : '18.75rem',
+        rotateZ: 32,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[16],
+      {
+        x: window.screen.width > 768 ? '-2rem' : '-10rem',
+        y: window.screen.width > 768 ? '12rem' : '21.25rem',
+        rotateZ: 39,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[18],
+      {
+        x: window.screen.width > 768 ? '-3rem' : '33rem',
+        y: window.screen.width > 768 ? '21rem' : '16rem',
+        rotateZ: 53,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[19],
+      {
+        x: window.screen.width > 768 ? '-6rem' : '31.5rem',
+        y: window.screen.width > 768 ? '27rem' : '20rem',
+        rotateZ: 61,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[20],
+      {
+        x: window.screen.width > 768 ? '-10rem' : '29.25rem',
+        y: window.screen.width > 768 ? '34rem' : '24.25rem',
+        rotateZ: 69,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[21],
+      {
+        x: window.screen.width > 768 ? '-15rem' : '26.5rem',
+        y: window.screen.width > 768 ? '40.5rem' : '28.5rem',
+        rotateZ: 77,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      titleLetters[22],
+      {
+        x: window.screen.width > 768 ? '-21rem' : '23rem',
+        y: window.screen.width > 768 ? '47rem' : '33rem',
+        rotateZ: 85,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[0][0],
+      {
+        x: window.screen.width > 768 ? '-3.5rem' : '0.75rem',
+        y: window.screen.width > 768 ? '25.25rem' : '-5rem',
+        rotateZ: 58,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[0][1],
+      {
+        x: window.screen.width > 768 ? '-3.6rem' : '0.1rem',
+        y: window.screen.width > 768 ? '26.35rem' : '-3.85rem',
+        rotateZ: 56,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[0][2],
+      {
+        x: window.screen.width > 768 ? '-3.75rem' : '-0.2rem',
+        y: window.screen.width > 768 ? '27.5rem' : '-3rem',
+        rotateZ: 55,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[0][3],
+      {
+        x: window.screen.width > 768 ? '-3.9rem' : '-0.6rem',
+        y: window.screen.width > 768 ? '28.75rem' : '-1.75rem',
+        rotateZ: 52,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[0][4],
+      {
+        x: window.screen.width > 768 ? '-4rem' : '-1.25rem',
+        y: window.screen.width > 768 ? '30.25rem' : '-0.5rem',
+        rotateZ: 50,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[1][0],
+      {
+        x: window.screen.width > 768 ? '-5.5rem' : '-1.75rem',
+        y: window.screen.width > 768 ? '37rem' : '5.6rem',
+        rotateZ: 36,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[1][1],
+      {
+        x: window.screen.width > 768 ? '-5.25rem' : '-1.9rem',
+        y: window.screen.width > 768 ? '38rem' : '6.5rem',
+        rotateZ: 34,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[1][2],
+      {
+        x: window.screen.width > 768 ? '-5rem' : '-2rem',
+        y: window.screen.width > 768 ? '39rem' : '7.25rem',
+        rotateZ: 32,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[1][3],
+      {
+        x: window.screen.width > 768 ? '-5rem' : '-2rem',
+        y: window.screen.width > 768 ? '39.75rem' : '8rem',
+        rotateZ: 30,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[1][4],
+      {
+        x: window.screen.width > 768 ? '-4.75rem' : '-2rem',
+        y: window.screen.width > 768 ? '40.4rem' : '8.6rem',
+        rotateZ: 28,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[1][5],
+      {
+        x: window.screen.width > 768 ? '-4.5rem' : '-2rem',
+        y: window.screen.width > 768 ? '41rem' : '9.25rem',
+        rotateZ: 26,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[2][0],
+      {
+        x: window.screen.width > 768 ? '-3.5rem' : '-0.8rem',
+        y: window.screen.width > 768 ? '44.4rem' : '11.9rem',
+        rotateZ: 12,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[2][1],
+      {
+        x: window.screen.width > 768 ? '-3rem' : '-0.75rem',
+        y: window.screen.width > 768 ? '44.75rem' : '12.2rem',
+        rotateZ: 10,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[2][2],
+      {
+        x: window.screen.width > 768 ? '-2.75rem' : '-0.6rem',
+        y: window.screen.width > 768 ? '45rem' : '12.5rem',
+        rotateZ: 8,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[2][3],
+      {
+        x: window.screen.width > 768 ? '-2.25rem' : '-0.5rem',
+        y: window.screen.width > 768 ? '45.25rem' : '12.75rem',
+        rotateZ: 7,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[2][4],
+      {
+        x: window.screen.width > 768 ? '-1.75rem' : '-0.5rem',
+        y: window.screen.width > 768 ? '45.4rem' : '12.9rem',
+        rotateZ: 4.8,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][0],
+      {
+        x: window.screen.width > 768 ? '-0.75rem' : '1.25rem',
+        y: window.screen.width > 768 ? '45.25rem' : '12.5rem',
+        rotateZ: -8,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][1],
+      {
+        x: window.screen.width > 768 ? '-0.1rem' : '1.5rem',
+        y: window.screen.width > 768 ? '45rem' : '12.25rem',
+        rotateZ: -10,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][2],
+      {
+        x: window.screen.width > 768 ? '0.5rem' : '1.5rem',
+        y: window.screen.width > 768 ? '44.75rem' : '12rem',
+        rotateZ: -12,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][3],
+      {
+        x: window.screen.width > 768 ? '0.75rem' : '1.75rem',
+        y: window.screen.width > 768 ? '44.4rem' : '11.7rem',
+        rotateZ: -14,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][4],
+      {
+        x: window.screen.width > 768 ? '1.25rem' : '1.75rem',
+        y: window.screen.width > 768 ? '44rem' : '11.4rem',
+        rotateZ: -16,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][5],
+      {
+        x: window.screen.width > 768 ? '1.5rem' : '1.75rem',
+        y: window.screen.width > 768 ? '43.75rem' : '11rem',
+        rotateZ: -18,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][6],
+      {
+        x: window.screen.width > 768 ? '2rem' : '1.75rem',
+        y: window.screen.width > 768 ? '43.25rem' : '10.5rem',
+        rotateZ: -20,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[3][7],
+      {
+        x: window.screen.width > 768 ? '2.25rem' : '1.75rem',
+        y: window.screen.width > 768 ? '42.75rem' : '10rem',
+        rotateZ: -22,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][0],
+      {
+        x: window.screen.width > 768 ? '3.25rem' : '2.1rem',
+        y: window.screen.width > 768 ? '35rem' : '3.5rem',
+        rotateZ: -42,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][1],
+      {
+        x: window.screen.width > 768 ? '3.25rem' : '1.9rem',
+        y: window.screen.width > 768 ? '34.25rem' : '2.5rem',
+        rotateZ: -43,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][2],
+      {
+        x: window.screen.width > 768 ? '3.25rem' : '1.75rem',
+        y: window.screen.width > 768 ? '33.25rem' : '1.5rem',
+        rotateZ: -46,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][3],
+      {
+        x: window.screen.width > 768 ? '3.25rem' : '1rem',
+        y: window.screen.width > 768 ? '31.75rem' : '0.4rem',
+        rotateZ: -48,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][4],
+      {
+        x: window.screen.width > 768 ? '3.25rem' : '0.75rem',
+        y: window.screen.width > 768 ? '30.5rem' : '-0.75rem',
+        rotateZ: -50,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][6],
+      {
+        x: window.screen.width > 768 ? '4rem' : '0.75rem',
+        y: window.screen.width > 768 ? '28.25rem' : '-2.5rem',
+        rotateZ: -54,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][7],
+      {
+        x: window.screen.width > 768 ? '3.5rem' : '0.3rem',
+        y: window.screen.width > 768 ? '27.2rem' : '-3.5rem',
+        rotateZ: -56,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][8],
+      {
+        x: window.screen.width > 768 ? '3.25rem' : '-0.25rem',
+        y: window.screen.width > 768 ? '25.75rem' : '-4.75rem',
+        rotateZ: -58,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomWords[4][9],
+      {
+        x: window.screen.width > 768 ? '3rem' : '-0.75rem',
+        y: window.screen.width > 768 ? '24.5rem' : '-6rem',
+        rotateZ: -60,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomChildrens[1],
+      {
+        x: window.screen.width > 768 ? '-5.25rem' : '-2rem',
+        y: window.screen.width > 768 ? '34rem' : '2.5rem',
+        rotateZ: 45,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomChildrens[3],
+      {
+        x: window.screen.width > 768 ? '-3.75rem' : '-1.25rem',
+        y: window.screen.width > 768 ? '43.5rem' : '10.75rem',
+        rotateZ: 15,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomChildrens[5],
+      {
+        x: window.screen.width > 768 ? '-1rem' : '0.25rem',
+        y: window.screen.width > 768 ? '45.75rem' : '12.75rem',
+        rotateZ: 3,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .to(
+      bottomChildrens[7],
+      {
+        x: window.screen.width > 768 ? '6.5rem' : '3rem',
+        y: window.screen.width > 768 ? '37.25rem' : '6.75rem',
+        rotateZ: -2,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .from(
+      left,
+      {
+        scale: 0.5,
+        x: -500,
+        y: 500,
+        duration: duration - 1
+      },
+      '<'
+    )
+    .from(
+      right,
+      {
+        scale: 0.5,
+        x: 500,
+        y: 500,
+        duration: duration - 1
+      },
+      '<'
+    );
+};

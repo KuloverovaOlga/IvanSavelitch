@@ -22,10 +22,11 @@
     display: flex;
     justify-content: space-between;
     @include small-tablet {
+      margin-top: -30.5rem;
+      padding: 40rem 0;
       height: fit-content;
       display: flex;
       flex-direction: column;
-      padding: 30rem 0 40rem;
       gap: 8rem;
       background: url(./assets/images/category-hero-bg-mob.svg) no-repeat top/cover;
     }
