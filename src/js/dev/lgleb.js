@@ -1099,7 +1099,88 @@ const weightTabs = () => {
 //     );
 // };
 
+const solutionsAnimation = () => {
+  const block = document.querySelector('.solutions'),
+    subtitle = block.querySelector('.solutions__subtitle-wrapper'),
+    circles = block.querySelectorAll('.solutions__circle-icon'),
+    bottomBtn = block.querySelector('.solutions__row-button'),
+    bottomTexts = block.querySelectorAll('.solutions__row-text'),
+    title = block.querySelector('.solutions__title-wrapper'),
+    // background = block.querySelector('.solutions__background'),
+    duration = 3;
 
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: block,
+      start: 'top center'
+    }
+  });
+
+  timeline
+    .from(subtitle, {
+      y: '-=100',
+      duration: duration - 2
+    })
+    .from(
+      circles[1],
+      {
+        y: '-=400',
+        duration: duration - 2
+      },
+      '<'
+    )
+    .from(
+      circles[2],
+      {
+        x: '+=500',
+        duration: duration - 2
+      },
+      '<'
+    )
+    .from(
+      circles[0],
+      {
+        y: '-=500',
+        duration: duration - 2
+      },
+      '>-1'
+    )
+    .from(
+      bottomBtn,
+      {
+        y: '+=200',
+        duration: duration - 2
+      },
+      0
+    )
+    .from(
+      bottomTexts,
+      {
+        height: 0,
+        y: '-=5.4rem',
+        duration: duration - 2
+      },
+      '<'
+    )
+    .from(
+      title,
+      {
+        rotate: -15,
+        y: '+=100',
+        height: 0,
+        duration: duration - 2
+      },
+      '<'
+    );
+  // .from(
+  //   background,
+  //   {
+  //     y: '+=200',
+  //     duration: duration - 2
+  //   },
+  //   '<'
+  // );
+};
 
 const Swipers = () => {
   const catalogBlockSwiper = new Swiper('.catalog-block__swiper', {
