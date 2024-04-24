@@ -165,6 +165,22 @@
       object-fit: cover;
     }
   }
+
+  @media (max-width: 48em) {
+    width: 14rem;
+    height: 14rem;
+    border-radius: 14rem;
+
+    svg {
+      width: 7rem;
+      height: 7rem;
+    }
+
+    img {
+      width: 7.6rem;
+      height: 7.6rem;
+    }
+  }
 }
 
 .like-btn {
