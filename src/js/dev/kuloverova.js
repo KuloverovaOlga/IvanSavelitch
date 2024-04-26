@@ -1,7 +1,28 @@
 
 import '../page/main'
 import '../page/production'
+import '../page/history'
 
+// import popup from '../utils/popup';
+// import form from '../utils/form';
+import 'inputmask';
+export const modules = {}; 
+document.addEventListener('DOMContentLoaded', () => {
+    // try {
+    //     popup();
+    //   } catch {}
+    //   try {
+    //     form();
+    //   } catch {}
+      try {
+        phoneMask();
+      } catch {}
+    })
+
+    function phoneMask() {
+        const mask = new Inputmask('+7 (999) 999 99 99');
+        mask.mask($('.phone-mask'));
+      }
 // gsap.utils.toArray('.item').forEach(function (elem) {
 //   ScrollTrigger.create({
 //     trigger: elem,
