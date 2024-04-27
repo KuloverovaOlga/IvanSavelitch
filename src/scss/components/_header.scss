@@ -1,12 +1,13 @@
 .header {
   position: relative;
-  z-index: 20;
+  z-index: 190;
   &--main,
   &--anim {
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
+
   }
 
   @include small-tablet {

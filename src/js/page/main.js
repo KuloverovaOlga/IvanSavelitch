@@ -13,17 +13,17 @@ export const modules = {};
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(ScrollToPlugin);
-
   if (document.querySelector('.main-home')) {
-    animateHeader(duration, ease);
     mainHeroSwiper();
-    mainHeroAnim(duration, ease);
     aboutOurfarmFavorite();
     latestNewsSwiper();
-
+    preloader().then(() => {
+      document.querySelector('.preloader').classList.add('preloader-remove');
+      animateHeader(duration, easeHeader);
+      mainHeroAnim(duration, ease);
+    });
     if (window.innerWidth > 767) {
       let executedFunctions = {};
-
       new fullpage('#fullpage', {
         scrollingSpeed: 1500,
         scrollOverflow: false,
@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       gsap.to(window, { duration: 0.5, scrollTo: '.header' });
       setTimeout(() => {
+        document.body.style.overflow = '';
         catalogBannerAnimationMob(duration, ease);
         loveAnimationMob(duration, ease);
         aboutOurFarmAnimMob(duration, ease);
@@ -91,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animateFooterMob(duration, ease);
         developmentText();
         developmentAnimation();
-      }, 500);
+      }, 5000);
     }
   }
 });
@@ -99,6 +100,170 @@ document.addEventListener('DOMContentLoaded', () => {
 let duration = 3;
 let centerAnim = window.innerWidth > 768 ? '90%' : '40%';
 let ease = 'power2.inOut';
+let easeHeader = window.innerWidth > 768 ? 'power2.inOut' : 'power2';
+
+function preloader() {
+  return new Promise((resolve, reject) => {
+    document.body.style.overflow = 'hidden';
+    const preloader = document.querySelector('.preloader'),
+      num = document.querySelector('.preloader__content-num'),
+      percent = document.querySelector('.preloader__content-percent'),
+      text = document.querySelector('.preloader__content-text'),
+      content = document.querySelector('.preloader__content-bg'),
+      logo = document.querySelector('.header__logo--preloader'),
+      nav = document.querySelector('.header__nav'),
+      btnBox = document.querySelector('.header__btn-box'),
+      leftBg = document.querySelector('.preloader__bg--left'),
+      rightBg = document.querySelector('.preloader__bg--right');
+
+    nav.style.opacity = 0;
+    btnBox.style.opacity = 0;
+    leftBg.style.opacity = 1;
+    rightBg.style.opacity = 1;
+
+    for (let i = 0; i < 100; i++) {
+      if (i < 20 || i > 80) {
+        const span = document.createElement('span');
+        span.textContent = i + 1;
+        num.appendChild(span);
+      }
+    }
+    const tl = gsap.timeline();
+
+    tl.from(num, {
+      duration: 1.5,
+      opacity: 0,
+      y: 500,
+      x: -500,
+      ease: 'power2.inOut' // Эффект анимации
+    })
+      .from(
+        percent,
+        {
+          duration: 1.5,
+          opacity: 0,
+          y: 500,
+          x: 500,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=1.5'
+      )
+      .from(
+        logo,
+        {
+          duration: 1.5,
+          y: '-100',
+          opacity: 0,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=1.5'
+      )
+      .from(
+        content,
+        {
+          duration: 1.5,
+          opacity: 0,
+          scale: 0,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=1.5'
+      )
+      .from(
+        text,
+        {
+          duration: 1.5,
+          opacity: 0,
+          y: 400,
+          x: 200,
+          scale: 0.3,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=1.5'
+      )
+      .from(
+        leftBg,
+        {
+          duration: 1.5,
+          opacity: 0,
+          scale: 0.5,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=1.5'
+      )
+      .from(
+        rightBg,
+        {
+          duration: 1.5,
+          opacity: 0,
+          scale: 0.3,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=1.5'
+      )
+      .to(num, {
+        duration: 3,
+        scrollTop: num.scrollHeight - num.clientHeight, // Прокручиваем до конца
+        ease: 'power2.inOut' // Эффект анимации
+      })
+      .to(content, {
+        duration: 0.5,
+        opacity: 0,
+        scale: 0.3,
+        ease: 'power2.inOut' // Эффект анимации
+      })
+      .to(
+        num,
+        {
+          duration: 0.5,
+          opacity: 0,
+          scale: 0.3,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=0.5'
+      )
+      .to(
+        percent,
+        {
+          duration: 0.5,
+          opacity: 0,
+          scale: 0.3,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=0.5'
+      )
+      .to(
+        leftBg,
+        {
+          duration: 0.5,
+          opacity: 0,
+          scale: 0.3,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=0.5'
+      )
+      .to(
+        rightBg,
+        {
+          duration: 0.5,
+          opacity: 0,
+          scale: 0.3,
+          ease: 'power2.inOut' // Эффект анимации
+        },
+        '-=0.5'
+      )
+      .to(
+        text,
+        {
+          duration: 0.5,
+          opacity: 0,
+          scale: 0.3,
+          ease: 'power2.inOut', // Эффект анимации
+          onComplete: () => resolve()
+        },
+        '-=0.5'
+      );
+  });
+}
 
 export function animateHeader(duration, ease) {
   let header = document.querySelector('.header');
@@ -1738,7 +1903,7 @@ function latestNewsAnimMob(duration, ease) {
 
 export function animateFooter(duration, ease) {
   const footer = document.querySelector('.footer--anim'),
-    footerSvgBox = footer.querySelector('.footer__svg-box');
+  footerSvgBox = footer.querySelector('.footer__svg-box');
   gsap.timeline().from(footerSvgBox, { width: 0, duration: 1.5, ease: 'linear' });
 }
 
