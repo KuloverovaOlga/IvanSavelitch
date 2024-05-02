@@ -1,8 +1,6 @@
 import Swiper from 'swiper';
 import { gsap, ScrollTrigger } from 'gsap/all';
 
-import { rem } from '../utils/constants';
-
 window.addEventListener('DOMContentLoaded', () => {
   Swipers();
 
@@ -18,6 +16,11 @@ window.addEventListener('DOMContentLoaded', () => {
   //   developmentText();
   //   developmentAnimation();
   // }
+
+  if (document.querySelector('.solutions')) {
+    solutionsAnimation();
+    afterSolutionsAnimation();
+  }
 });
 
 const weightTabs = () => {
@@ -1182,6 +1185,41 @@ const solutionsAnimation = () => {
   // );
 };
 
+const afterSolutionsAnimation = () => {
+  const block = document.querySelector('.solutions'),
+    btn = document.querySelector('.solutions__row-button'),
+    icon = document.querySelector('.solutions__circle-icon:nth-child(3)'),
+    swiperIcon = document.querySelector('.advantages__icons-swiper--icon'),
+    duration = 1.5;
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: block,
+      start: 'bottom center'
+    }
+  });
+
+  timeline
+    .to(btn, {
+      x: window.screen.width > 768 ? '52rem' : '0rem',
+      y: window.screen.width > 768 ? '61rem' : '147rem',
+      duration
+    })
+    .to(
+      icon,
+      {
+        x: window.screen.width > 768 ? '-8.95rem' : '-2.4rem',
+        y: window.screen.width > 768 ? '95.7rem' : '299.7rem',
+        onComplete: () => {
+          icon.style.visibility = 'hidden';
+          swiperIcon.style.visibility = 'visible';
+        },
+        duration
+      },
+      '<'
+    );
+};
+
 const Swipers = () => {
   const catalogBlockSwiper = new Swiper('.catalog-block__swiper', {
     slidesPerView: 1.2,
@@ -1282,6 +1320,81 @@ const Swipers = () => {
     navigation: {
       nextEl: '.love__swiper-btn--next',
       prevEl: '.love__swiper-btn--prev'
+    }
+  });
+
+  const advantagesIconsSwiper = new Swiper('.advantages__icons-swiper', {
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+    speed: 1000,
+    effect: 'fade',
+    allowTouchMove: false
+  });
+
+  const advantagesTextSwiper = new Swiper('.advantages__text-swiper', {
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+    speed: 1000,
+    autoHeight: true,
+    allowTouchMove: false,
+    spaceBetween: 10
+  });
+
+  const advantagesTagsSwiper = new Swiper('.advantages__tags-swiper', {
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+    speed: 1000,
+    allowTouchMove: false,
+    effect: 'creative',
+
+    creativeEffect: {
+      next: {
+        translate: [0, '150%', 0],
+        opacity: 0
+      },
+
+      prev: {
+        translate: ['100rem', 0, 0],
+        opacity: 0
+      }
+    }
+  });
+
+  const advantagesTitlesSwiper = new Swiper('.advantages__titles-swiper', {
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+    speed: 1000,
+    mousewheel: true,
+    autoHeight: true,
+    effect: 'creative',
+
+    controller: {
+      control: [advantagesTagsSwiper, advantagesTextSwiper, advantagesIconsSwiper]
+    },
+
+    creativeEffect: {
+      next: {
+        translate: window.screen.width > 768 ? [0, '110%', 0] : [0, '200%', 0]
+      },
+
+      prev: {
+        translate: [0, '-110%', 0]
+      }
+    },
+
+    on: {
+      slideChange: (swiper) => {
+        const activeSlide = swiper.activeIndex;
+
+        document.querySelector('.advantages__number').textContent =
+          activeSlide + 1 < 10 ? `0${activeSlide + 1}` : activeSlide + 1;
+      }
+    },
+
+    breakpoints: {
+      768: {
+        autoHeight: false
+      }
     }
   });
 };

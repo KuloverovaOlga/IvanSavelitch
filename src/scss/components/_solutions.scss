@@ -2,6 +2,7 @@
   position: relative;
   text-align: center;
   margin-top: 6rem;
+  margin-bottom: 40rem;
 
   &__background {
     position: absolute;
@@ -35,6 +36,7 @@
 
   &__box {
     position: relative;
+    max-height: 42.4rem;
   }
 
   &__circle-icon {
@@ -69,6 +71,8 @@
   }
 
   @media (max-width: 48em) {
+    margin-bottom: 51.2rem;
+
     &__background {
       height: auto;
     }
@@ -80,6 +84,7 @@
 
     &__box {
       margin-bottom: 6.8rem;
+      max-height: none;
     }
 
     &__title {
