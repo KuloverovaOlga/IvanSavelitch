@@ -111,13 +111,22 @@ export let formValidate = {
       }
     } else if (formRequiredItem.dataset.required === 'tel') {
       // formRequiredItem.value = formRequiredItem.value.replace(/[^0-9]/g, ''); // Оставить только цифры и символы +()
-      if (!/^\+\d{1,2} \(\d{3}\) \d{3} \d{2} \d{2}$/.test(formRequiredItem.value)) {
+      if (!/^\+ \d{1,2} \(  \d{3}  \)  \d{3}  -  \d{2}  -  \d{2}$/.test(formRequiredItem.value)) {
+
         this.addError(formRequiredItem);
         error++;
       } else {
         this.removeError(formRequiredItem);
       }
-    } else if (formRequiredItem.dataset.required === 'dropdown') {
+    } else if (formRequiredItem.dataset.required === 'code') {
+      // formRequiredItem.value = formRequiredItem.value.replace(/[^0-9]/g, ''); // Оставить только цифры и символы +()
+      if (!/^\d{3} \d{3}$/.test(formRequiredItem.value)) {
+        this.addError(formRequiredItem);
+        error++;
+      } else {
+        this.removeError(formRequiredItem);
+      }
+    }else if (formRequiredItem.dataset.required === 'dropdown') {
       if (!formRequiredItem.classList.contains('filled')) {
         this.addError(formRequiredItem);
         error++;

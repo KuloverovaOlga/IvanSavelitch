@@ -388,6 +388,7 @@
 
   &__link-text {
     width: 10.4rem;
+
     @include small-tablet {
       font-size: 5.2rem;
       width: 14.6rem;

@@ -1,7 +1,7 @@
 .preloader {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 500;
   background-color: $orange;
   transition: opacity 0.5s, visibility 0.5s, z-index 0.5s;
 

@@ -6,7 +6,7 @@ import { gsap, ScrollTrigger, Draggable, MotionPathPlugin, ScrollToPlugin } from
 window.$ = window.jQuery = require('jquery');
 
 import { rem } from '../utils/constants';
-import { animateHeader, animateFooter, animateFooterMob } from './main';
+import { animateHeader, animateFooter, animateFooterMob, observerHtml } from './main';
 
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
       animateHeader(1.5, 'power2');
       animateHistory(1, 'power2');
       historySwiper();
-    }  else {
-        historySwiperMob();
+      observerHtml();
+    } else {
+      historySwiperMob();
     }
   }
 });
@@ -323,9 +324,9 @@ function historySwiperMob() {
     autoHeight: true,
     speed: 800,
     navigation: {
-        nextEl: '.history-slide-mob__btn--next',
-        prevEl: '.history-slide-mob__btn--prev'
-      }
+      nextEl: '.history-slide-mob__btn--next',
+      prevEl: '.history-slide-mob__btn--prev'
+    }
   });
 
   const swiperTitle = new Swiper('.history-slide-mob__title-swiper', {

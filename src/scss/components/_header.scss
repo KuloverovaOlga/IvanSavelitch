@@ -7,7 +7,6 @@
     top: 0;
     right: 0;
     left: 0;
-
   }
 
   @include small-tablet {
@@ -141,5 +140,102 @@
       width: 4.8rem;
       height: 4.8rem;
     }
+  }
+
+  // .header__mob
+
+  &__mob {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $orange;
+    z-index: 200;
+    padding: 11.2rem 4rem 8rem;
+
+    flex-direction: column;
+    gap: 27rem;
+    overflow: auto;
+    transform: translateX(200%);
+    visibility: hidden;
+    display: none;
+    transition: transform 0.8s, visibility 0.8s;
+    &.active {
+      transform: translateX(0);
+      visibility: visible;
+    }
+    @include small-tablet {
+      display: flex;
+    }
+  }
+
+  &__mob-bg {
+    position: absolute;
+    z-index: -1;
+    top: -25rem;
+    right: 3rem;
+    width: 128.1rem;
+    height: 102rem;
+  }
+
+  // .header__mob-header
+
+  &__mob-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // .header__logo
+
+  &__logo {
+  }
+
+  // .header__logo-img-box
+
+  &__logo-img-box {
+  }
+
+  // .header__close-btn
+
+  &__close-btn {
+    width: 4.8rem;
+    height: 4.8rem;
+    & svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // .header__mob-nav
+
+  &__mob-nav {
+  }
+
+  // .header__mob-nav-list
+
+  &__mob-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12rem;
+    text-align: center;
+  }
+
+  // .header__mob-nav-item
+
+  &__mob-nav-item {
+  }
+
+  // .header__mob-nav-link
+
+  &__mob-nav-link {
+    font-family: 'Steelfish';
+    font-weight: 400;
+    font-size: 10rem;
+    line-height: 100%;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-align: center;
   }
 }
