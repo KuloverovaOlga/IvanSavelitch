@@ -1,28 +1,54 @@
+import '../page/main';
+import '../page/production';
+import '../page/history';
 
-import '../page/main'
-import '../page/production'
-import '../page/history'
+import popup from '../utils/popup';
+import form from '../utils/form';
 
-// import popup from '../utils/popup';
-// import form from '../utils/form';
-import 'inputmask';
-export const modules = {}; 
+export const modules = {};
 document.addEventListener('DOMContentLoaded', () => {
-    // try {
-    //     popup();
-    //   } catch {}
-    //   try {
-    //     form();
-    //   } catch {}
-      try {
-        phoneMask();
-      } catch {}
-    })
+  try {
+    popup();
+  } catch {}
+  try {
+    form();
+  } catch {}
+  try {
+    burger();
+  } catch {}
+});
 
-    function phoneMask() {
-        const mask = new Inputmask('+7 (999) 999 99 99');
-        mask.mask($('.phone-mask'));
-      }
+function burger() {
+  const burger = document.querySelector('.burger');
+  const headerMob = document.querySelector('.header__mob');
+  const closeBtn = document.querySelector('.close-burger');
+
+  burger.addEventListener('click', () => {
+    if (!burger.classList.contains('active')) {
+      burger.classList.add('active');
+      headerMob.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  closeBtn.addEventListener('click', () => {
+    if (burger.classList.contains('active')) {
+      headerMob.classList.remove('active');
+      burger.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      headerMob.classList.remove('active');
+      burger.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
+setTimeout(() => {
+  document.querySelectorAll('.popup').forEach((item) => (item.style.display = 'block'));
+}, 100);
+
 // gsap.utils.toArray('.item').forEach(function (elem) {
 //   ScrollTrigger.create({
 //     trigger: elem,

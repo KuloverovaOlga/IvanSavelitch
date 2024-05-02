@@ -8,7 +8,7 @@ import { gsap, ScrollTrigger, Draggable, MotionPathPlugin, ScrollToPlugin } from
 window.$ = window.jQuery = require('jquery');
 
 import { rem } from '../utils/constants';
-import { animateHeader, animateFooter, animateFooterMob } from './main';
+import { animateHeader, animateFooter, animateFooterMob, observerHtml } from './main';
 export const modules = {};
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -93,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.production-hero__info-scroll-btn').addEventListener('click', () => {
         mainPageFull.moveTo(2);
       });
+
+      observerHtml();
     } else {
       gsap.to(window, { duration: 0.5, scrollTo: '.header' });
       const scroll = document.querySelector(`.production-hero__info-scroll-btn`);
@@ -116,8 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-
-
 
 let duration = 2;
 let ease = 'power2.in';

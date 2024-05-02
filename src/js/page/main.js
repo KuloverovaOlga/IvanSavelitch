@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       });
+      observerHtml();
     } else {
       gsap.to(window, { duration: 0.5, scrollTo: '.header' });
       setTimeout(() => {
@@ -102,6 +103,26 @@ let centerAnim = window.innerWidth > 768 ? '90%' : '40%';
 let ease = 'power2.inOut';
 let easeHeader = window.innerWidth > 768 ? 'power2.inOut' : 'power2';
 
+// Функция, которая будет вызываться при изменении классов элемента <html>
+function handleHtmlClassChanges(mutationsList) {
+  mutationsList.forEach((mutation) => {
+    if (mutation.attributeName === 'class') {
+      const html = document.documentElement;
+      if (html.classList.contains('lock')) {
+        fullpage_api.setAllowScrolling(false);
+      } else {
+        fullpage_api.setAllowScrolling(true);
+      }
+    }
+  });
+}
+
+export function observerHtml() {
+  const observer = new MutationObserver(handleHtmlClassChanges);
+  const config = { attributes: true, attributeFilter: ['class'] };
+  observer.observe(document.documentElement, config);
+}
+
 function preloader() {
   return new Promise((resolve, reject) => {
     document.body.style.overflow = 'hidden';
@@ -114,10 +135,12 @@ function preloader() {
       nav = document.querySelector('.header__nav'),
       btnBox = document.querySelector('.header__btn-box'),
       leftBg = document.querySelector('.preloader__bg--left'),
-      rightBg = document.querySelector('.preloader__bg--right');
+      rightBg = document.querySelector('.preloader__bg--right'),
+      contentBox = document.querySelector('.preloader__content')
 
     nav.style.opacity = 0;
     btnBox.style.opacity = 0;
+    contentBox.style.opacity = 1;
     leftBg.style.opacity = 1;
     rightBg.style.opacity = 1;
 
@@ -1903,7 +1926,7 @@ function latestNewsAnimMob(duration, ease) {
 
 export function animateFooter(duration, ease) {
   const footer = document.querySelector('.footer--anim'),
-  footerSvgBox = footer.querySelector('.footer__svg-box');
+    footerSvgBox = footer.querySelector('.footer__svg-box');
   gsap.timeline().from(footerSvgBox, { width: 0, duration: 1.5, ease: 'linear' });
 }
 
